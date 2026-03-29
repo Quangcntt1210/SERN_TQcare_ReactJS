@@ -1,0 +1,149 @@
+.login-background {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Work Sans", sans-serif;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(173, 216, 230, 1) 50%,
+            rgba(0, 102, 204, 1) 100%);
+
+    .login-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+        background-color: rgb(224, 234, 238);
+        border: 1px solid rgba(20, 94, 119, 0.3);
+        border-radius: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+        .login-content {
+            .text-login {
+                text-align: center;
+                font-weight: 600;
+                font-size: 28px;
+                color: #145e77;
+                margin-bottom: 25px;
+            }
+
+            .login-input {
+                margin-bottom: 15px;
+
+                input {
+                    width: 100%;
+                    padding: 12px 15px;
+                    border-radius: 12px;
+                    border: 1px solid #ccc;
+                    outline: none;
+                    transition: all 0.3s;
+
+                    &:focus {
+                        border-color: #0066cc;
+                        box-shadow: 0 0 5px rgba(0, 102, 204, 0.2);
+                    }
+                }
+
+                .custom-input-password {
+                    position: relative;
+
+                    i {
+                        position: absolute;
+                        right: 20px;
+                        top: 18px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .btn-login {
+                width: 100%;
+                height: 48px;
+                margin-top: 10px;
+                border-radius: 31px;
+                border: none;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+                background: linear-gradient(135deg, #698bd1 0%, #0066cc 100%);
+                transition: all 0.3s;
+
+                &:hover {
+                    opacity: 0.9;
+                    transform: translateY(-1px);
+                }
+            }
+
+            .forgot-password {
+                text-align: center;
+                margin: 15px 0;
+                font-size: 14px;
+                color: #145e77;
+                cursor: pointer;
+            }
+
+            .social-login {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            .text-center {
+                margin-top: 17px;
+            }
+
+            .forgot {
+                margin-top: 9px;
+            }
+
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                display: flex;
+
+                align-items: center;
+                justify-content: center;
+                background-color: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 12px;
+                font-size: 24px;
+
+                transition: all 0.3s ease;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+
+            .facebook {
+                @extend .social-icon;
+                color: #1877F2;
+                border: 1px solid #747373;
+
+                &:hover {
+                    border-color: #1877F2;
+                }
+            }
+
+            .google {
+                @extend .social-icon;
+                background: linear-gradient(135deg, #4285F4 0%, #EA4335 50%, #FBBC05 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                border: 1px solid #747373;
+
+                &:hover {
+                    border-color: #EA4335;
+                }
+            }
+        }
+    }
+}
