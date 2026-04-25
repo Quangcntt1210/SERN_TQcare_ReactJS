@@ -12,14 +12,16 @@ import '@formatjs/intl-relativetimeformat/locale-data/vi';
 
 import { LanguageUtils } from '../utils'
 
-const messages = LanguageUtils.getFlattenedMessages();
+
 
 class IntlProviderWrapper extends Component {
 
     render() {
         const { children, language } = this.props;
+        const messages = LanguageUtils.getFlattenedMessages();
         return (
             <IntlProvider
+                key={language}
                 locale={language}
                 messages={messages[language]}
                 defaultLocale="vi">

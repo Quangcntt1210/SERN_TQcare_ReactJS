@@ -1,0 +1,559 @@
+// body {
+//     font-family: 'Segoe UI', Arial, sans-serif;
+//     background-color: #f5f9ff;
+// }
+
+
+// .title {
+//     font-size: 24px;
+//     font-weight: 600;
+//     text-align: center;
+
+//     background: linear-gradient(135deg, #3498db, #6dd5fa);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+
+//     margin-bottom: 20px;
+//     letter-spacing: 0.5px;
+
+//     animation: fadeSlideDown 0.6s ease;
+// }
+
+// .title::after {
+//     content: "";
+//     display: block;
+//     margin: 8px auto 0;
+//     width: 60px;
+//     height: 3px;
+//     border-radius: 2px;
+//     background: linear-gradient(135deg, #6dd5fa, #3498db);
+// }
+
+
+// @keyframes fadeSlideDown {
+//     from {
+//         opacity: 0;
+//         transform: translateY(-10px);
+//     }
+
+//     to {
+//         opacity: 1;
+//         transform: translateY(0);
+//     }
+// }
+
+
+// .table-container {
+//     overflow-x: auto;
+// }
+
+// .btn-add-custom {
+
+//     background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+//     color: white;
+//     border: none;
+//     padding: 10px 22px;
+//     border-radius: 12px;
+
+//     font-weight: 600;
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+
+//     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+//     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+//     letter-spacing: 0.5px;
+// }
+
+// .btn-add-custom i {
+//     font-size: 1.1rem;
+//     transition: transform 0.3s ease;
+// }
+
+// .btn-neumorphic {
+//     background: #e0e0e0;
+//     /* Trùng với màu nền app */
+//     color: #444;
+//     border: none;
+//     padding: 12px 28px;
+//     border-radius: 50px;
+//     font-weight: 600;
+//     display: flex;
+//     align-items: center;
+//     gap: 12px;
+//     /* Trái tim của Neumorphism: Bóng 2 chiều */
+//     box-shadow: 6px 6px 12px #bebebe,
+//         -6px -6px 12px #ffffff;
+//     transition: all 0.2s ease-out;
+// }
+
+// .btn-glass {
+//     position: relative;
+//     overflow: hidden;
+//     background: rgba(255, 255, 255, 0.1);
+//     /* Kính trong suốt */
+//     color: white;
+//     border: 1px solid rgba(255, 255, 255, 0.2);
+//     /* Viền kính */
+//     padding: 12px 30px;
+//     border-radius: 15px;
+//     font-weight: 500;
+//     display: flex;
+//     align-items: center;
+//     gap: 12px;
+//     backdrop-filter: blur(10px);
+//     /* Hiệu ứng mờ nền quan trọng nhất */
+//     -webkit-backdrop-filter: blur(10px);
+//     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+//     transition: all 0.3s ease;
+//     letter-spacing: 1px;
+//     text-transform: uppercase;
+//     /* Chữ in hoa trông pro hơn */
+//     font-size: 0.85rem;
+// }
+
+// /* Hiệu ứng ánh sáng bóng loáng lướt qua */
+// .glass-reflection {
+//     position: absolute;
+//     top: 0;
+//     left: -100%;
+//     width: 100%;
+//     height: 100%;
+//     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+//     transition: 0.5s;
+// }
+
+// .btn-glass:hover {
+//     background: rgba(255, 255, 255, 0.2);
+//     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+//     border: 1px solid rgba(255, 255, 255, 0.4);
+// }
+
+// .btn-glass:hover .glass-reflection {
+//     left: 100%;
+//     /* Ánh sáng lướt qua khi hover */
+// }
+
+// .btn-gold {
+//     background: #111;
+//     /* Đen sâu */
+//     color: #c3a343;
+//     /* Màu vàng kim */
+//     border: 1px solid #c3a343;
+//     /* Viền vàng */
+//     padding: 12px 30px;
+//     border-radius: 4px;
+//     /* Góc nhọn trông cứng cáp, quyền lực hơn */
+//     font-weight: 700;
+//     text-transform: uppercase;
+//     letter-spacing: 2px;
+//     display: flex;
+//     align-items: center;
+//     gap: 15px;
+//     position: relative;
+//     transition: all 0.4s cubic-bezier(0.5, 1, 0.89, 1);
+//     box-shadow: 0 0 0 rgba(195, 163, 67, 0);
+// }
+
+// .btn-gold:hover {
+//     background: #c3a343;
+//     /* Vàng kim lắp đầy khi hover */
+//     color: #111;
+//     box-shadow: 0 0 20px rgba(195, 163, 67, 0.6);
+//     /* Hào quang vàng */
+// }
+
+// /* Chi tiết dấu cộng xoay khi hover */
+// .btn-gold:hover i {
+//     transform: rotate(180deg);
+//     transition: transform 0.4s ease;
+// }
+
+// .btn-neumorphic:hover {
+//     color: #007bff;
+//     /* Đổi màu chữ khi hover */
+// }
+
+// .btn-neumorphic {
+//     background: #e0e0e0;
+//     /* Trùng với màu nền app */
+//     color: #444;
+//     border: none;
+//     padding: 12px 28px;
+//     border-radius: 50px;
+//     font-weight: 600;
+//     display: flex;
+//     align-items: center;
+//     gap: 12px;
+//     /* Trái tim của Neumorphism: Bóng 2 chiều */
+//     box-shadow: 6px 6px 12px #bebebe,
+//         -6px -6px 12px #ffffff;
+//     transition: all 0.2s ease-out;
+// }
+
+// .btn-neumorphic:hover {
+//     color: #007bff;
+//     /* Đổi màu chữ khi hover */
+// }
+
+// .btn-neumorphic:active {
+//     box-shadow: inset 6px 6px 12px #bebebe,
+//         inset -6px -6px 12px #ffffff;
+//     transform: scale(0.98);
+//     /* Nhấn lún xuống */
+// }
+
+// .btn-neumorphic:active {
+//     box-shadow: inset 6px 6px 12px #bebebe,
+//         inset -6px -6px 12px #ffffff;
+//     transform: scale(0.98);
+//     /* Nhấn lún xuống */
+// }
+
+// /* Hiệu ứng khi di chuột vào */
+// .btn-add-custom:hover {
+//     background: linear-gradient(135deg, #224abe 0%, #4e73df 100%);
+//     color: white;
+//     transform: translateY(-2px);
+//     /* Nhấc nút lên nhẹ */
+//     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.2), 0 3px 6px rgba(0, 0, 0, 0.08);
+// }
+
+// .btn-add-custom:hover i {
+//     transform: rotate(90deg);
+//     /* Icon xoay nhẹ khi hover trông rất tinh tế */
+// }
+
+// /* Hiệu ứng khi bấm vào */
+// .btn-add-custom:active {
+//     transform: translateY(1px);
+//     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+// }
+
+// .user-table {
+//     margin-top: 20px;
+//     margin-left: 5px;
+//     margin-right: 5px;
+
+
+//     max-height: 75vh;
+//     overflow-y: auto;
+
+//     border-radius: 12px;
+//     border: 1px solid #eef2f7;
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+// }
+
+// /* ===== FIX HEADER (STICKY) ===== */
+// th {
+//     padding: 14px 16px;
+//     background: linear-gradient(135deg, #6dd5fa, #3498db);
+//     color: #ffffff;
+//     font-weight: 600;
+//     text-align: center;
+//     position: sticky;
+//     top: 0;
+//     z-index: 10;
+// }
+
+// table {
+//     width: 100%;
+//     border-collapse: collapse;
+//     background: #ffffff;
+// }
+
+// /* ===== TABLE ===== */
+// table {
+//     width: 100%;
+//     border-collapse: separate;
+//     border-spacing: 0;
+//     background: #ffffff;
+
+//     border-radius: 12px;
+//     overflow: hidden;
+
+//     border: 1px solid #eef2f7;
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+// }
+
+
+// /* ===== HEADER ===== */
+// th {
+//     padding: 14px 16px;
+//     text-align: left;
+
+//     background: linear-gradient(135deg, #6dd5fa, #3498db);
+//     color: #ffffff;
+
+//     font-weight: 600;
+//     font-size: 14px;
+//     letter-spacing: 0.5px;
+//     text-align: center;
+// }
+
+// /* Bo góc header */
+// th:first-child {
+//     border-top-left-radius: 12px;
+// }
+
+// th:last-child {
+//     border-top-right-radius: 12px;
+// }
+
+// /* ===== CELL ===== */
+// td {
+//     padding: 12px 16px;
+//     border-bottom: 1px solid #eef2f7;
+//     font-size: 14px;
+//     color: #2c3e50;
+// }
+
+// /* ===== ROW ===== */
+// tr {
+//     transition: background-color 0.2s ease;
+// }
+
+// /* Zebra */
+// tr:nth-child(even) {
+//     background-color: #f8fbff;
+// }
+
+// /* Hover */
+// tr:hover {
+//     background-color: #eaf4ff;
+// }
+
+// /* ===== ACTION COLUMN ===== */
+// td:last-child {
+//     text-align: center;
+// }
+
+// /* ===== BUTTONS ===== */
+// .btn-edit,
+// .btn-delete {
+//     width: 42px;
+//     height: 36px;
+//     border: none;
+//     border-radius: 10px;
+//     cursor: pointer;
+//     margin: 0 6px;
+
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: center;
+
+//     font-size: 16px;
+//     color: #240094;
+
+//     transition: all 0.25s ease;
+
+//     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+// }
+
+// /* ICON */
+// .btn-edit i,
+// .btn-delete i {
+//     pointer-events: none;
+// }
+
+// /* HOVER */
+// .btn-edit:hover,
+// .btn-delete:hover {
+//     transform: translateY(-2px);
+//     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+// }
+
+// /* ACTIVE */
+// .btn-edit:active,
+// .btn-delete:active {
+//     transform: scale(0.95);
+// }
+
+
+// .btn-edit:focus,
+// .btn-delete:focus {
+//     outline: none;
+//     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+// }
+
+// /* EDIT BUTTON */
+// .btn-edit {
+//     background: linear-gradient(135deg, #6dd5fa, #3498db);
+// }
+
+// .btn-edit:hover {
+//     background: linear-gradient(135deg, #5bc0eb, #2e86de);
+// }
+
+
+// .btn-delete {
+//     background: linear-gradient(135deg, #4facfe, #1c6dd0);
+// }
+
+// .btn-delete:hover {
+//     background: linear-gradient(135deg, #3a8dde, #154c9c);
+// }
+
+
+// @media (max-width: 768px) {
+
+//     th,
+//     td {
+//         padding: 10px;
+//         font-size: 13px;
+//     }
+// }
+
+// --- Variables (Đồng bộ với Header xanh của bạn) ---
+$primary-blue: #0071ba; // Màu xanh đậm giống Header
+$light-blue: #3498db;
+$accent-blue: #6dd5fa;
+$bg-body: #f8f9fc;
+$text-main: #2c3e50;
+$border-color: #e3e6f0;
+
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; // Dùng font hiện đại hơn
+    background-color: $bg-body;
+    color: $text-main;
+}
+
+// --- Title Section ---
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, $primary-blue, $light-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        margin: 10px auto 0;
+        width: 50px;
+        height: 4px;
+        background: $accent-blue;
+        border-radius: 10px;
+    }
+}
+
+// --- Button Add (Neumorphic kết hợp Blue) ---
+.btn-neumorphic {
+    background: #ffffff;
+    color: $primary-blue;
+    border: 2px solid $primary-blue;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $primary-blue;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 113, 186, 0.2);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+// --- Table Design (Tránh vỡ layout & Chuyên nghiệp) ---
+.user-table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; // Bo góc cả bảng
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    border: none;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0;
+    }
+
+    th {
+        // Gradient đồng bộ với Header ảnh bạn gửi
+        background: linear-gradient(90deg, $primary-blue 0%, $light-blue 100%);
+        color: white;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 16px;
+        border: none;
+        text-align: left; // Chỉnh lại căn lề trái cho tự nhiên
+    }
+
+    td {
+        padding: 14px 16px;
+        vertical-align: middle;
+        border-top: 1px solid #f1f3f9;
+        color: #4e73df;
+        font-size: 14px;
+    }
+
+    // Hiệu ứng dòng
+    tr:nth-of-type(even) {
+        background-color: #fcfdff;
+    }
+
+    tr:hover {
+        background-color: #f8faff;
+        transition: background-color 0.2s ease;
+    }
+}
+
+// --- Action Buttons (Sửa lỗi màu xanh trùng lặp) ---
+.btn-edit,
+.btn-delete {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+
+    &:hover {
+        background-color: #3498db;
+        color: white;
+    }
+}
+
+.btn-delete {
+    background-color: rgba(231, 76, 60, 0.1); // Màu đỏ nhạt cho nút xóa
+    color: #e74c3c;
+
+    &:hover {
+        background-color: #e74c3c;
+        color: white;
+    }
+}
+
+// --- Responsive ---
+@media (max-width: 768px) {
+    .user-table {
+        display: block;
+        overflow-x: auto; // Chống vỡ layout trên mobile
+        white-space: nowrap;
+    }
+}

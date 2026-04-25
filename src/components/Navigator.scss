@@ -1,95 +1,200 @@
 @import "../styles/common.scss";
 
+$nav-height: 48px;
+$menu-width: 220px;
+$transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$dropdown-bg: $bg-menu-color;
+$text-color: $text-in-light;
+$active-color: $colormain;
+$shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
 .navigator-menu {
     display: flex;
     margin: 0;
     padding: 0;
-    &.list-unstyled,
-    .list-unstyled {
-        list-style-type: none;
-    }
+    list-style: none;
+
     .menu-group {
+        position: relative;
+        height: 100%;
+        transition: background-color $transition-fast;
+
+
+        .menu-group-name {
+            position: relative;
+            line-height: $nav-height;
+            padding: 0 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all $transition-fast;
+
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 3px;
+                background-color: $active-color;
+                transition: var(--transition-smooth);
+                transform: translateX(-50%);
+                border-radius: 4px 4px 0 0;
+            }
+
+            &:first-child {
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+
+        .menu-list {
+            display: block;
+            background-color: $dropdown-bg;
+            box-shadow: $shadow;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 8px 0;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px;
+
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity $transition-fast, transform $transition-fast;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+
+            .menu {
+                width: $menu-width;
+                position: relative;
+                padding: 0;
+                line-height: 38px;
+                text-transform: none;
+                transition: background-color $transition-fast;
+
+                .menu-link {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    text-decoration: none;
+                    color: $text-color;
+                    padding: 0 15px;
+                    font-size: 14px;
+                    transition: all $transition-fast;
+
+                    &.collapsed {
+                        cursor: pointer;
+                    }
+                }
+
+                .sub-menu-list {
+                    display: block;
+                    background-color: $dropdown-bg;
+                    box-shadow: $shadow;
+                    position: absolute;
+                    top: 0;
+                    left: calc(100% + 2px);
+                    padding: 8px 0;
+                    min-width: 190px;
+                    border-radius: 4px;
+
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateX(10px);
+                    transition: all $transition-fast;
+
+                    .sub-menu {
+                        padding: 0;
+                        white-space: nowrap;
+                        transition: background-color $transition-fast;
+
+                        &:hover {
+                            background-color: rgba($active-color, 0.08);
+                        }
+
+                        .sub-menu-link {
+                            display: block;
+                            padding: 0 20px;
+                            text-decoration: none;
+                            color: $text-color;
+                            font-size: 13.5px;
+                        }
+
+                        &.active .sub-menu-link {
+                            font-weight: 600;
+                            color: $active-color;
+                            background-color: rgba($active-color, 0.05);
+                            border-left: 3px solid $active-color;
+                        }
+                    }
+                }
+
+
+                &.active>.menu-link {
+                    font-weight: 600;
+                    color: $active-color !important;
+                    background-color: rgba($active-color, 0.05);
+                }
+
+
+                &:hover {
+                    background-color: rgba($active-color, 0.08);
+
+                    .sub-menu-list {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateX(0);
+                    }
+
+                    >.menu-link {
+                        color: $active-color;
+                        padding-left: 20px;
+                    }
+                }
+
+                .icon-right {
+                    font-size: 10px;
+                    opacity: 0.5;
+                    margin-left: 10px;
+                }
+            }
+        }
+
         &:hover {
             cursor: pointer;
-            background-color: darken($colormain, 5);
-        }
-        .menu-group-name {
-            line-height: 40px;
-            padding: 0 15px;
-            border-right: 1px solid $border;
-            &:first-child {
-                border-left: 1px solid $border;
+            background-color: rgba(255, 255, 255, 0.05);
+
+            .menu-group-name {
+                color: #fff;
+
+                &::after {
+                    width: 70%;
+                }
+
+            }
+
+            >.menu-list {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
             }
         }
-        .menu-list {
-            display: none;
-            background-color: $bg-menu-color;
-            box-shadow: 2px 2px 4px 0 $box-shadow-color;
-            -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
-            color: $text-in-light;
-            position: absolute;
-            padding: 0;
-            .menu {
-                width: 205px;
-                padding: 0 15px;
-                height: 35px;
-                line-height: 35px;
-                text-transform: none;
-                .menu-link {
-                    text-decoration: none;
-                    color: $text-in-light;
+
+
+        &.active {
+            .menu-group-name {
+                color: #fff;
+                font-weight: 600;
+
+                &::after {
+                    width: 85%;
+                    background-color: $active-color;
+                    box-shadow: 0 -2px 8px rgba($active-color, 0.4);
                 }
-                .sub-menu-list {
-                    display: none;
-                    background-color: $bg-menu-color;
-                    box-shadow: 2px 2px 4px 0 $box-shadow-color;
-                    -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
-                    position: absolute;
-                    top: 0;
-                    left: 205px;
-                    padding: 0;
-                    .sub-menu {
-                        padding: 0 15px;
-                        height: 35px;
-                        line-height: 35px;
-                        white-space: nowrap;
-                        &:hover {
-                            background-color: darken($bg-menu-color, 5);
-                        }
-                        .sub-menu-link {
-                            text-decoration: none;
-                            color: $text-in-light;
-                        }
-                        a {
-                            display: block;
-                        }
-                        &.active a {
-                            font-weight: 500;
-                            color: $colormain;
-                        }
-                    }
-                }
-                &.active span {
-                    font-weight: 500;
-                    color: $colormain;
-                }
-                &:hover {
-                    background-color: darken($bg-menu-color, 3);
-                    .sub-menu-list {
-                        display: block;
-                    }
-                }
-                .icon-right {
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    right: 10px;
-                }
-            }
-        }
-        &:hover {
-            .menu-list {
-                display: block;
             }
         }
     }

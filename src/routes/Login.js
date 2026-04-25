@@ -9,7 +9,7 @@ import userIcon from '../../src/assets/images/user.svg';
 import passIcon from '../../src/assets/images/pass.svg';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
-
+import { Redirect } from 'react-router-dom';
 import adminService from '../services/adminService';
 
 class Login extends Component {
@@ -48,33 +48,58 @@ class Login extends Component {
         navigate(`${redirectPath}`);
     }
 
-    processLogin = () => {
-        const { username, password } = this.state;
+    // processLogin = () => {
+    //     const { username, password } = this.state;
 
-        const { adminLoginSuccess, adminLoginFail } = this.props;
-        let loginBody = {
-            username: 'admin',
-            password: '123456'
-        }
-        //sucess
-        let adminInfo = {
-            "tlid": "0",
-            "tlfullname": "Administrator",
-            "custype": "A",
-            "accessToken": "eyJhbGciOiJIU"
-        }
+    //     const { userLoginSuccess, adminLoginFail } = this.props;
+    //     let loginBody = {
+    //         username: this.state.username,
+    //         password: this.state.password
+    //     }
+    //     //sucess
+    //     let adminInfo = {
+    //         "tlid": "0",
+    //         "tlfullname": "Administrator",
+    //         "custype": "A",
+    //         "accessToken": "eyJhbGciOiJIU"
+    //     }
 
-        adminLoginSuccess(adminInfo);
-        this.refresh();
-        this.redirectToSystemPage();
+    //     userLoginSuccess(adminInfo);
+    //     this.refresh();
+    //     // this.redirectToSystemPage();
+    //     try {
+    //         adminService.login(loginBody)
+    //     } catch (e) {
+    //         console.log('error login : ', e)
+    //     }
+
+    // }
+    processLogin = async () => {
+        this.setState({ loginError: '' });
         try {
-            adminService.login(loginBody)
+            let response = await adminService.login({
+                username: this.state.username,
+                password: this.state.password
+            });
+
+            // THÊM DÒNG NÀY ĐỂ KIỂM TRA DỮ LIỆU THỰC TẾ
+            console.log(">>> Check response từ server: ", response);
+
+            if (response && response.errorCode === 0) {
+                // Phải đảm bảo response.user tồn tại
+                this.props.userLoginSuccess(response.user);
+                console.log(">>> Đã gửi action thành công lên Redux");
+            } else {
+                // Hiển thị lỗi từ server trả về (ví dụ: 'Sai mật khẩu')
+                this.setState({
+                    loginError: response && response.errMessage ? response.errMessage : 'Login failed!'
+                });
+            }
         } catch (e) {
-            console.log('error login : ', e)
+            console.error(">>> Lỗi kết nối API: ", e);
+            this.setState({ loginError: 'Cannot connect to Server!' });
         }
-
     }
-
     handlerKeyDown = (event) => {
         const keyCode = event.which || event.keyCode;
         if (keyCode === KeyCodeUtils.ENTER) {
@@ -99,7 +124,11 @@ class Login extends Component {
     render() {
         const { username, password, loginError } = this.state;
         const { lang } = this.props;
-
+        const { isLoggedIn } = this.props;
+        console.log("isLoggedIn:", this.props.isLoggedIn);
+        if (isLoggedIn) {
+            return <Redirect to="/system/user-manage" />
+        }
         return (
             <div className="login-wrapper">
                 <div className="login-container">
@@ -158,15 +187,16 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        lang: state.app.language
+        lang: state.app.language,
+        isLoggedIn: state.user.isLoggedIn
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
+        userLoginFail: () => dispatch(actions.userLoginFail()),
     };
 };
 

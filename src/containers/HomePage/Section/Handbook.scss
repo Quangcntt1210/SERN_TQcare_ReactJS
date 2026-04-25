@@ -1,0 +1,107 @@
+@import '../../../styles/common.scss';
+
+.section-Handbook {
+    padding: 60px 0;
+    background-color: #e8ecef;
+    height: auto;
+
+    .Handbook-content {
+        @extend .container-common;
+
+        .Handbook-header {
+            @extend .section-header;
+
+            .Handbook-title {
+                @extend .section-title;
+            }
+
+            .Handbook-btn {
+                @extend .btn-common;
+            }
+        }
+    }
+
+    .content {
+        flex: 1;
+        box-shadow: none;
+
+        span {
+            display: block;
+            text-align: left;
+            white-space: normal;
+            word-break: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.4;
+        }
+
+        .card-link {
+            white-space: pre-line;
+        }
+    }
+
+    .mySwiper {
+        width: 100%;
+        height: auto;
+        padding: 20px 10px 40px 10px;
+
+        .swiper-slide {
+            @extend .card-item;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+
+            .bg-image {
+                @extend .card-image;
+                width: 158px;
+                height: 156px;
+                flex-shrink: 0;
+                border-radius: 8px;
+
+            }
+
+            span {
+                @extend .card-text;
+                text-align: left;
+                justify-content: flex-start;
+            }
+        }
+
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            --swiper-navigation-color: rgba(0, 0, 0, 0.45);
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+            z-index: 10;
+
+            &::after {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            &:hover {
+                --swiper-navigation-color: #5f5f5f;
+                background: #c5c2c2;
+                border-color: #010101;
+            }
+        }
+
+        .swiper-pagination-bullet {
+            bottom: 0px;
+
+            &-active {
+                width: 20px;
+                background: #45c3d2;
+            }
+        }
+    }
+}

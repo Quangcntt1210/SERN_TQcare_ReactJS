@@ -1,0 +1,175 @@
+// @import '../../../styles/common.scss';
+
+// .section-Doctor {
+//     padding: 60px 0;
+//     background-color: #f8f9fa;
+//     height: auto;
+
+//     .Doctor-content {
+//         @extend .container-common;
+
+//         .Doctor-header {
+//             @extend .section-header;
+
+//             .Doctor-title {
+//                 @extend .section-title;
+//             }
+
+//             .Doctor-btn {
+//                 @extend .btn-common;
+//             }
+//         }
+//     }
+
+//     .mySwiper {
+//         width: 100%;
+//         height: auto;
+//         padding: 20px 10px 40px 10px;
+
+//         .swiper-slide {
+//             @extend .card-item;
+
+//             .bg-image {
+//                 @extend .card-image;
+//                 width: 141px;
+//                 height: 150px;
+//                 border-radius: 50%;
+//                 margin: 20px auto 24px auto;
+//             }
+
+//             span {
+//                 @extend .card-text;
+//             }
+//         }
+
+
+
+//         .swiper-button-next,
+//         .swiper-button-prev {
+//             --swiper-navigation-color: rgba(0, 0, 0, 0.45);
+//             width: 32px;
+//             height: 32px;
+//             background: #fff;
+//             border-radius: 50%;
+//             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             border: 1px solid #eee;
+//             z-index: 10;
+
+//             &::after {
+//                 font-size: 14px;
+//                 font-weight: bold;
+//             }
+
+//             &:hover {
+//                 --swiper-navigation-color: #5f5f5f;
+//                 background: #c5c2c2;
+//                 border-color: #010101;
+//             }
+//         }
+
+//         .swiper-pagination-bullet {
+//             bottom: 0px;
+
+//             &-active {
+//                 width: 20px;
+//                 background: #45c3d2;
+//             }
+//         }
+//     }
+// }
+
+// .tesst {
+//     cursor: pointer;
+// }
+
+
+@import '../../../styles/common.scss';
+
+.section-Doctor {
+    padding: 60px 0;
+    background-color: #f0f4f8;
+
+    .Doctor-content {
+        @extend .container-common;
+
+        .Doctor-header {
+            @extend .section-header;
+
+            .Doctor-title {
+                @extend .section-title;
+            }
+
+            .Doctor-btn {
+                @extend .btn-common;
+            }
+        }
+    }
+
+    .mySwiper {
+        padding: 20px 10px 40px;
+
+        .swiper-slide {
+            @extend .card-item;
+
+            .bg-image {
+                @extend .card-image;
+                @extend .card-image-hover;
+
+
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: 20px auto;
+            }
+
+            span {
+                @extend .card-text;
+            }
+
+            .card-link {
+                @extend .card-link;
+                padding: 24px;
+            }
+        }
+
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            --swiper-navigation-color: rgba(0, 0, 0, 0.5);
+
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::after {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            &:hover {
+                --swiper-navigation-color: #000;
+                background: #ddd;
+            }
+        }
+
+        .swiper-pagination-bullet {
+            background: #ccc;
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #45c3d2;
+            width: 20px;
+            border-radius: 5px;
+        }
+    }
+}

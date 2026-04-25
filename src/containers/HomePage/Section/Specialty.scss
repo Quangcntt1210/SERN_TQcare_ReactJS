@@ -1,0 +1,229 @@
+// .section-specialty {
+//     padding: 60px 0;
+//     background-color: #f8f9fa;
+//     height: auto;
+
+//     .specialty-content {
+//         width: 100%;
+//         max-width: 1140px;
+//         margin: 0 auto;
+//         padding: 0 15px;
+
+//         .specialty-header {
+//             display: flex;
+//             justify-content: space-between;
+//             align-items: center;
+//             margin-bottom: 20px;
+//             padding: 0 10px;
+
+//             .specialty-title {
+//                 font-size: 24px;
+//                 font-weight: 700;
+//                 color: #333;
+//                 text-transform: capitalize;
+//                 position: relative;
+
+//                 &::after {
+//                     content: '';
+//                     position: absolute;
+//                     bottom: -8px;
+//                     left: 0;
+//                     width: 40px;
+//                     height: 3px;
+//                     background-color: #45c3d2;
+//                     border-radius: 2px;
+//                 }
+//             }
+
+//             .specialty-btn {
+//                 background-color: #ebebeb;
+//                 color: #333;
+//                 padding: 8px 16px;
+//                 border-radius: 4px;
+//                 font-size: 14px;
+//                 font-weight: 500;
+//                 text-decoration: none;
+//                 transition: all 0.3s ease;
+//                 border: none;
+//                 cursor: pointer;
+
+//                 &:hover {
+//                     background-color: #45c3d2;
+//                     color: #fff;
+//                 }
+//             }
+//         }
+//     }
+
+//     .mySwiper {
+//         width: 100%;
+//         height: auto;
+//         padding: 20px 10px 40px 10px;
+
+//         .swiper-slide {
+//             background: #ffffff;
+//             border-radius: 12px;
+//             overflow: hidden;
+//             display: flex;
+//             flex-direction: column;
+//             align-items: center;
+//             height: auto;
+//             transition: transform 0.3s ease, box-shadow 0.3s ease;
+//             border: 1px solid #ebebeb;
+//             cursor: pointer;
+
+//             &:hover {
+//                 transform: translateY(-5px);
+//                 box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+//                 border-color: #45c3d2;
+//             }
+
+
+//             .bg-image {
+//                 width: 100%;
+//                 height: 200px;
+//                 background-position: center top;
+//                 background-repeat: no-repeat;
+//                 background-size: cover;
+//                 background-color: #eee;
+//                 flex-shrink: 0;
+//             }
+
+
+//             span {
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: center;
+//                 text-align: center;
+//                 width: 100%;
+//                 padding: 12px;
+//                 font-size: 16px;
+//                 font-weight: 600;
+//                 color: #333;
+//                 min-height: 50px;
+//             }
+//         }
+
+//         .swiper-button-next,
+//         .swiper-button-prev {
+//             --swiper-navigation-color: rgba(0, 0, 0, 0.45);
+//             width: 32px;
+//             height: 32px;
+//             background: #fff;
+//             border-radius: 50%;
+//             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             border: 1px solid #eee;
+//             z-index: 10;
+
+//             &::after {
+//                 font-size: 14px;
+//                 font-weight: bold;
+//             }
+
+//             &:hover {
+//                 --swiper-navigation-color: #5f5f5f;
+//                 background: #c5c2c2;
+//                 border-color: #010101;
+//             }
+//         }
+
+//         .swiper-pagination-bullet {
+//             bottom: 0px;
+
+//             &-active {
+//                 width: 20px;
+//                 background: #45c3d2;
+//             }
+//         }
+//     }
+// }
+
+@import '../../../styles/common.scss';
+
+.section-specialty {
+    padding: 60px 0;
+    background-color: #f0f4f8;
+    height: auto;
+
+    .specialty-content {
+        @extend .container-common;
+
+        .specialty-header {
+            @extend .section-header;
+
+            .specialty-title {
+                @extend .section-title;
+            }
+
+            .specialty-btn {
+                @extend .btn-common;
+            }
+        }
+    }
+
+    .mySwiper {
+        width: 100%;
+        height: auto;
+        padding: 20px 10px 40px 10px;
+
+        .swiper-slide {
+            @extend .card-item;
+            //them
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+            // them
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+                border-color: #45c3d2;
+            }
+
+            .bg-image {
+                @extend .card-image;
+            }
+
+            span {
+                @extend .card-text;
+            }
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            --swiper-navigation-color: rgba(0, 0, 0, 0.45);
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+            z-index: 10;
+
+            &::after {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            &:hover {
+                --swiper-navigation-color: #5f5f5f;
+                background: #c5c2c2;
+                border-color: #010101;
+            }
+        }
+
+        .swiper-pagination-bullet {
+            bottom: 0px;
+
+            &-active {
+                width: 20px;
+                background: #45c3d2;
+            }
+        }
+    }
+}

@@ -38,7 +38,7 @@ class Menu extends Component {
                         >
                             <FormattedMessage id={name} />
                             <div className="icon-right">
-                                <i className={"far fa-angle-right"} />
+                                <i className="fas fa-angle-double-right"></i>
                             </div>
                         </span>
                         <div>
@@ -48,10 +48,10 @@ class Menu extends Component {
                         </div>
                     </Fragment>
                 ) : (
-                        <Link to={link} className="menu-link" onClick={onLinkClick}>
-                            <FormattedMessage id={name} />
-                        </Link>
-                    )}
+                    <Link to={link} className="menu-link" onClick={onLinkClick}>
+                        <FormattedMessage id={name} />
+                    </Link>
+                )}
             </li>
         );
     }
@@ -185,10 +185,10 @@ class Navigator extends Component {
     };
 
     render() {
-        const { menus, location, onLinkClick } = this.props;
+        const { menus, location, onLinkClick, language } = this.props;
         return (
             <Fragment>
-                <ul className="navigator-menu list-unstyled">
+                <ul key={language} className="navigator-menu list-unstyled">
                     {
                         menus.map((group, groupIndex) => {
                             return (
@@ -235,6 +235,7 @@ class Navigator extends Component {
 
 const mapStateToProps = state => {
     return {
+        language: state.app.language
     };
 };
 

@@ -5,22 +5,59 @@ import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
 import './Header.scss';
-
+import { LANGUAGE } from '../../utils';
+// import { LANGUAGE } from '../../utils/constant';
+import { changeLanguageApp } from '../../store/actions';
+import { FormattedMessage } from 'react-intl';
 class Header extends Component {
-
+    handleChangeLanguage = (language) => {
+        this.props.changeLanguageAppRedux(language);
+    }
     render() {
-        const { processLogout } = this.props;
+        const { processLogout, lang, userInfo } = this.props;
+
 
         return (
-            <div className="header-container">
-                {/* thanh navigator */}
+            <div className="header-container" >
+
                 <div className="header-tabs-container">
+                    {/* <Navigator key={lang} menus={adminMenu} /> */}
                     <Navigator menus={adminMenu} />
                 </div>
 
-                {/* nút logout */}
-                <div className="btn btn-logout" onClick={processLogout}>
-                    <i className="fas fa-sign-out-alt"></i>
+                <div className="header-actions">
+                    <div className="language-select">
+                        <i className="fas fa-globe"></i>
+                        <select
+                            className='flag'
+                            value={lang}
+                            onChange={(e) => this.handleChangeLanguage(e.target.value)}
+                        >
+                            <option
+                                className={lang === LANGUAGE.VI ? 'language-vi action' : 'language-vi'}
+                                value={LANGUAGE.VI}
+                            >
+                                Vietnamese
+                            </option>
+                            <option
+                                className={lang === LANGUAGE.EN ? 'language-en action' : 'language-en'}
+                                value={LANGUAGE.EN}
+                            >
+                                English
+                            </option>
+                        </select>
+
+                    </div>
+                    <span className='welcome'>
+                        <FormattedMessage id="menu.system.welcome" />{userInfo && userInfo.firstName ? userInfo.firstName : ''}
+                    </span>
+
+                    <div className="btn-logout" onClick={processLogout} title="Logout">
+                        <i className="fas fa-sign-out-alt"></i>
+
+                        <span><FormattedMessage id="menu.system.logout" /></span>
+
+                    </div>
                 </div>
             </div>
         );
@@ -30,13 +67,16 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.admin.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        lang: state.app.language,
+        userInfo: state.user.userInfo,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         processLogout: () => dispatch(actions.processLogout()),
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
