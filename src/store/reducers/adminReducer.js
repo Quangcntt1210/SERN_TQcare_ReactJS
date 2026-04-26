@@ -6,7 +6,9 @@ const initialState = {
     isLoadingRole: false,
     genders: [],
     roles: [],
-    positions: []
+    positions: [],
+    users: [],
+    isUserCreated: false
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -68,7 +70,34 @@ const adminReducer = (state = initialState, action) => {
                 isLoadingRole: false
             }
 
+        case actionTypes.FETCH_ALL_USERS_SUCCESS:
+            return {
+                ...state,
+                users: action.users
+            };
 
+        case actionTypes.FETCH_ALL_USERS_FAILS:
+            return {
+                ...state,
+                users: []
+            };
+        case actionTypes.SAVE_USER_SUCCESS:
+            return {
+                ...state,
+                isUserCreated: true
+            };
+
+        case actionTypes.SAVE_USER_FAILS:
+            return {
+                ...state,
+                isUserCreated: false
+            };
+
+        case actionTypes.RESET_CREATE_USER:
+            return {
+                ...state,
+                isUserCreated: false
+            };
         default:
             return state;
     }

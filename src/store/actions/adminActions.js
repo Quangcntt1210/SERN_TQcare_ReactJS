@@ -1,6 +1,7 @@
 import actionTypes from './actionTypes';
-import { getAllcodeService } from '../../services/userService';
-
+import { createNewUserService, getAllcodeService, getAllUsers } from '../../services/userService';
+import { set } from 'lodash';
+import { toast } from "react-toastify";
 
 export const fetchGenderStart = () => async (dispatch, getState) => {
     try {
@@ -73,7 +74,7 @@ export const fetchRoleStart = () => async (dispatch, getState) => {
         }
 
     } catch (error) {
-        dispatch(fetchPositionFails());
+        dispatch(fetchRoleFails());
         console.log(error);
     }
 };
@@ -85,4 +86,62 @@ export const fetchRoleFails = () => ({
     type: actionTypes.FETCH_ROLE_FAILS
 })
 
+
+export const saveCreateUser = (data) => async (dispatch, getState) => {
+    try {
+
+        // dispatch({ type: actionTypes.SAVE_USER_SUCCESS });
+
+        let res = await createNewUserService(data);
+        console.log('check data from saveCreateUser: ', res);
+        if (res && res.data && res.data.errCode === 0) {
+
+            // toast.success("Create a new user succeed!");
+            dispatch(saveUserSuccess());
+        } else {
+            dispatch(saveUserFails());
+        }
+
+    } catch (error) {
+        dispatch(saveUserFails());
+        console.log(error);
+    }
+};
+export const saveUserSuccess = () => ({
+    type: actionTypes.SAVE_USER_SUCCESS,
+})
+export const saveUserFails = () => ({
+    type: actionTypes.SAVE_USER_FAILS
+})
+// export const saveUserExist = () => ({
+//     type: actionTypes.SAVE_USER_EXIST
+// })
+
+
+export const fetchAllUsersStart = () => async (dispatch, getState) => {
+    try {
+        let res = await getAllUsers('ALL');
+
+        if (res && res.errorCode === 0) {
+            let users = res.users.reverse();
+            dispatch(fetchAllUsersSuccess(users));
+        } else {
+            dispatch(fetchAllUsersFails());
+        }
+
+    } catch (error) {
+        dispatch(fetchAllUsersFails());
+        console.log(error);
+    }
+};
+export const fetchAllUsersSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+    users: data
+})
+export const fetchAllUsersFails = () => ({
+    type: actionTypes.FETCH_ALL_USERS_FAILS
+})
+export const resetCreateUser = () => ({
+    type: actionTypes.RESET_CREATE_USER
+});
 

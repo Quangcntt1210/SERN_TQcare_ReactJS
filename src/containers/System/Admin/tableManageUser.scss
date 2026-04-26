@@ -1,0 +1,116 @@
+// --- Variables ---
+$primary-blue: #0071ba;
+$light-blue: #3498db;
+$accent-blue: #6dd5fa;
+$bg-body: #f8f9fc;
+$text-main: #2c3e50;
+
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background-color: $bg-body;
+    color: $text-main;
+}
+
+// --- Title ---
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, $primary-blue, $light-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 30px 0;
+    text-align: center;
+
+    &::after {
+        content: "";
+        display: block;
+        margin: 10px auto 0;
+        width: 50px;
+        height: 4px;
+        background: $accent-blue;
+        border-radius: 10px;
+    }
+}
+
+// --- Table Design ---
+.user-table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: linear-gradient(90deg, $primary-blue 0%, $light-blue 100%);
+        color: white;
+        text-transform: uppercase;
+        font-size: 13px;
+        padding: 16px;
+        text-align: left;
+    }
+
+    td {
+        padding: 14px 16px;
+        border-top: 1px solid #f1f3f9;
+        color: $text-main;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    tr:nth-of-type(even) {
+        background-color: #fcfdff;
+    }
+
+    tr:hover {
+        background-color: #f8faff;
+        transition: 0.2s;
+    }
+}
+
+// --- Action Buttons ---
+.btn-edit,
+.btn-delete {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: rgba($light-blue, 0.1);
+    color: $light-blue;
+
+    &:hover {
+        background: $light-blue;
+        color: white;
+    }
+}
+
+.btn-delete {
+    background-color: rgba(#e74c3c, 0.1);
+    color: #e74c3c;
+
+    &:hover {
+        background: #e74c3c;
+        color: white;
+    }
+}
+
+// --- Responsive ---
+@media (max-width: 768px) {
+    .user-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

@@ -6,7 +6,9 @@ import { LANGUAGE } from '../../../utils/constant';
 import { changeLanguageApp } from '../../../store/actions';
 import adminReducer from '../../../store/reducers/adminReducer';
 import * as actions from "../../../store/actions";
-import { get } from 'lodash';
+import { get, set } from 'lodash';
+import TableManageUser from './TableManageUser';
+import { toast } from "react-toastify";
 class UserRedux extends Component {
 
     constructor(props) {
@@ -48,6 +50,9 @@ class UserRedux extends Component {
     handleOnChangeImage = (event) => {
         let file = event.target.files[0];
         if (file) {
+            if (this.state.previewImg) {
+                URL.revokeObjectURL(this.state.previewImg);
+            }
             let objectUrl = URL.createObjectURL(file);
 
             this.setState({
@@ -65,71 +70,145 @@ class UserRedux extends Component {
     }
     handleSaveUser = () => {
         let isValid = this.checkValidateInput();
+        if (!isValid) return;
 
-        if (isValid) {
-            console.log("Submit OK");
-        }
+        this.props.createNewUser({
+            email: this.state.email,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phoneNumber: this.state.phoneNumber,
+            gender: this.state.gender,
+            roleId: this.state.role,
+            positionId: this.state.position,
+        });
+        setTimeout(() => {
+            this.props.fetchUserRedux()
+        }, 500);
     }
     checkValidateInput = () => {
         let error = {};
-        let { email, password, phoneNumber } = this.state;
 
-        let arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phoneNumber', 'gender', 'position', 'role'];
+        const fields = [
+            'email',
+            'password',
+            'firstName',
+            'lastName',
+            'address',
+            'phoneNumber',
+            'gender',
+            'position',
+            'role'
+        ];
 
+        for (let i = 0; i < fields.length; i++) {
+            let field = fields[i];
+            let value = this.state[field];
 
+            switch (field) {
+                case 'email':
+                    if (!value) {
+                        error.email = 'manage-user.validate.required';
+                    } else {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(value)) {
+                            error.email = 'manage-user.validate.email';
+                        }
+                    }
+                    break;
 
-        arrInput.forEach(field => {
-            if (!this.state[field]) {
-                error[field] = 'manage-user.validate.required';
+                case 'password':
+                    if (!value) {
+                        error.password = 'manage-user.validate.required';
+                    } else {
+                        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+                        if (!passwordRegex.test(value)) {
+                            error.password = 'manage-user.validate.password';
+                        }
+                    }
+                    break;
+
+                case 'phoneNumber':
+                    if (!value) {
+                        error.phoneNumber = 'manage-user.validate.required';
+                    } else {
+                        const phoneRegex = /^(0|\+84)[0-9]{9}$/;
+                        if (!phoneRegex.test(value)) {
+                            error.phoneNumber = 'manage-user.validate.phone';
+                        }
+                    }
+                    break;
+
+                default:
+                    if (!value) {
+                        error[field] = 'manage-user.validate.required';
+                    }
+                    break;
             }
-        });
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email && !emailRegex.test(email)) {
-            error.email = 'manage-user.validate.email';
-        }
-        const phoneRegex = /^(0|\+84)[0-9]{9}$/;
-        if (phoneNumber && !phoneRegex.test(phoneNumber)) {
-            error.phoneNumber = 'manage-user.validate.phone';
-        }
 
 
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-        if (password && !passwordRegex.test(password)) {
-            error.password = 'manage-user.validate.password';
+            if (Object.keys(error).length > 0) break;
         }
 
         this.setState({ error });
 
         return Object.keys(error).length === 0;
-    }
+    };
     onChangeInput = (event, field) => {
         this.setState({
             [field]: event.target.value
         })
     }
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (prevProps.genderRedux !== this.props.genderRedux) {
-    //         let arrGenders = this.props.genderRedux
-    //         this.setState({
-    //             genderArr: arrGenders,
-    //             gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : ''
-    //         })
-    //     }
-    //     if (prevProps.positionRedux !== this.props.positionRedux) {
-    //         let arrPositions = this.props.positionRedux
-    //         this.setState({
-    //             positionArr: arrPositions,
-    //             position: arrPositions && arrPositions.length > 0 ? arrPositions[0].key : ''
-    //         })
-    //     }
-    //     if (prevProps.roleRedux !== this.props.roleRedux) {
-    //         let arrRoles = this.props.roleRedux
-    //         this.setState({
-    //             roleArr: arrRoles,
-    //             role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : ''
-    //         })
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+
+        if (prevProps.genderRedux !== this.props.genderRedux) {
+            const arr = this.props.genderRedux;
+
+            this.setState({
+                // gender: arr?.[0]?.key || ''
+                gender: '',
+            });
+        }
+
+        if (prevProps.positionRedux !== this.props.positionRedux) {
+            const arr = this.props.positionRedux;
+
+            this.setState({
+                // position: arr?.[0]?.key || ''
+                position: '',
+            });
+        }
+
+        if (prevProps.roleRedux !== this.props.roleRedux) {
+            const arr = this.props.roleRedux;
+
+            this.setState({
+                // role: arr?.[0]?.key || ''
+                role: '',
+            });
+        }
+        if (prevProps.listUsers !== this.props.listUsers) {
+            toast.success("Create a new user succeed!");
+            this.handleReset();
+        }
+    }
+
+
+    handleReset = () => {
+        this.setState({
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            phoneNumber: '',
+            gender: '',
+            position: '',
+            role: '',
+            error: {}
+        })
+    }
     render() {
         // dung khi didupdate
         // let gender = this.props.genderArr
@@ -396,15 +475,44 @@ class UserRedux extends Component {
                                                             <FormattedMessage id="manage-user.save" />
                                                         </button>
 
-                                                        <button type="reset" className="btn btn-outline-secondary px-3 shadow-sm">
+                                                        <button
+                                                            type="button"
+                                                            onClick={this.handleReset}
+                                                            className="btn btn-outline-secondary px-3 shadow-sm"
+                                                        >
                                                             <FormattedMessage id="manage-user.cancel" />
                                                         </button>
 
                                                     </div>
+
                                                 </form>
                                             </div>
+
+
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="container pb-5">
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-lg-10">
+
+                                    <div className="card shadow-sm border-0">
+                                        <div className="card-header bg-white border-0">
+                                            <h5 className="mb-0 fw-bold text-primary">
+
+                                            </h5>
+                                        </div>
+
+                                        <div className="card-body p-3">
+
+                                            {/* TABLE USER */}
+                                            <TableManageUser />
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -427,7 +535,9 @@ const mapStateToProps = state => {
         isLoadingPosition: state.admin.isLoadingPosition,
         isLoadingRole: state.admin.isLoadingRole,
         positionRedux: state.admin.positions,
-        roleRedux: state.admin.roles
+        roleRedux: state.admin.roles,
+        listUsers: state.admin.users,
+
     };
 };
 
@@ -437,6 +547,8 @@ const mapDispatchToProps = dispatch => {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        createNewUser: (data) => dispatch(actions.saveCreateUser(data)),
+        fetchUserRedux: () => dispatch(actions.fetchAllUsersStart()),
         //  processLogout: () => dispatch(actions.processLogout()),
         changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
 

@@ -82,15 +82,14 @@ class Login extends Component {
                 password: this.state.password
             });
 
-            // THÊM DÒNG NÀY ĐỂ KIỂM TRA DỮ LIỆU THỰC TẾ
             console.log(">>> Check response từ server: ", response);
 
             if (response && response.errorCode === 0) {
-                // Phải đảm bảo response.user tồn tại
+
                 this.props.userLoginSuccess(response.user);
                 console.log(">>> Đã gửi action thành công lên Redux");
             } else {
-                // Hiển thị lỗi từ server trả về (ví dụ: 'Sai mật khẩu')
+
                 this.setState({
                     loginError: response && response.errMessage ? response.errMessage : 'Login failed!'
                 });
