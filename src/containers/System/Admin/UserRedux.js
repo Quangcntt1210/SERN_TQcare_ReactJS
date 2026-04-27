@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import hardAvatar from "../../../assets/avatar_demo.jpg"
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGE } from '../../../utils/constant';
+import { LANGUAGE, CRUD_ACTIONS } from '../../../utils/constant';
 import { changeLanguageApp } from '../../../store/actions';
 import adminReducer from '../../../store/reducers/adminReducer';
 import * as actions from "../../../store/actions";
 import { get, set } from 'lodash';
 import TableManageUser from './TableManageUser';
 import { toast } from "react-toastify";
+import { injectIntl } from 'react-intl';
 class UserRedux extends Component {
 
     constructor(props) {
@@ -33,7 +34,8 @@ class UserRedux extends Component {
             avatar: '',
 
             error: {},
-
+            actions: '',
+            userEditId: '',
         }
 
     }
@@ -41,6 +43,7 @@ class UserRedux extends Component {
         this.props.getGenderStart()
         this.props.getPositionStart()
         this.props.getRoleStart()
+
     }
     componentWillUnmount() {
         if (this.state.previewImg) {
@@ -71,21 +74,35 @@ class UserRedux extends Component {
     handleSaveUser = () => {
         let isValid = this.checkValidateInput();
         if (!isValid) return;
+        let { actions } = this.state
+        if (actions === CRUD_ACTIONS.CREATE) {
+            this.props.createNewUser({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                roleId: this.state.role,
+                positionId: this.state.position,
+            });
+        } else if (actions === CRUD_ACTIONS.EDIT) {
+            this.props.editAUserRedux({
+                id: this.state.userEditId,
+                email: this.state.email,
+                // password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                roleId: this.state.role,
+                positionId: this.state.position,
+                // avatar: this.state.avatar
+            })
 
-        this.props.createNewUser({
-            email: this.state.email,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            address: this.state.address,
-            phoneNumber: this.state.phoneNumber,
-            gender: this.state.gender,
-            roleId: this.state.role,
-            positionId: this.state.position,
-        });
-        setTimeout(() => {
-            this.props.fetchUserRedux()
-        }, 500);
+        }
     }
     checkValidateInput = () => {
         let error = {};
@@ -118,13 +135,25 @@ class UserRedux extends Component {
                     }
                     break;
 
+                // case 'password':
+                //     if (!value) {
+                //         error.password = 'manage-user.validate.required';
+                //     } else {
+                //         const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+                //         if (!passwordRegex.test(value)) {
+                //             error.password = 'manage-user.validate.password';
+                //         }
+                //     }
+                //     break;
                 case 'password':
-                    if (!value) {
-                        error.password = 'manage-user.validate.required';
-                    } else {
-                        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-                        if (!passwordRegex.test(value)) {
-                            error.password = 'manage-user.validate.password';
+                    if (this.state.actions !== CRUD_ACTIONS.EDIT) {
+                        if (!value) {
+                            error.password = 'manage-user.validate.required';
+                        } else {
+                            const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+                            if (!passwordRegex.test(value)) {
+                                error.password = 'manage-user.validate.password';
+                            }
                         }
                     }
                     break;
@@ -160,40 +189,187 @@ class UserRedux extends Component {
             [field]: event.target.value
         })
     }
+    //     componentDidUpdate(prevProps) {
+
+    //       if (prevProps.genderRedux !== this.props.genderRedux && this.state.actions !== CRUD_ACTIONS.EDIT) {
+    //     this.setState({ gender: '' });
+    // }
+    //         //     const arr = this.props.genderRedux;
+
+    //         //     this.setState({
+    //         //         // gender: arr?.[0]?.key || ''
+    //         //         gender: '',
+    //         //     });
+    //         // }
+
+    //         if (prevProps.positionRedux !== this.props.positionRedux) {
+    //             const arr = this.props.positionRedux;
+
+    //             this.setState({
+    //                 // position: arr?.[0]?.key || ''
+    //                 position: '',
+    //             });
+    //         }
+
+    //         if (prevProps.roleRedux !== this.props.roleRedux) {
+    //             const arr = this.props.roleRedux;
+
+    //             this.setState({
+    //                 // role: arr?.[0]?.key || ''
+    //                 role: '',
+    //             });
+    //         }
+    //         // if (prevProps.listUsers !== this.props.listUsers) {
+
+    //         //     this.handleReset();
+    //         // }
+    //         if (prevProps.isUserCreated !== this.props.isUserCreated) {
+    //             if (this.props.isUserCreated === true) {
+
+    //                 toast.success(
+    //                     this.props.intl.formatMessage({ id: "manage-user.create-success" })
+    //                 );
+
+    //                 this.handleReset();
+
+    //                 this.props.resetCreateUser();
+
+    //             }
+    //         }
+    //         // SUCCESS
+    //         if (prevProps.deleteStatus !== this.props.deleteStatus) {
+
+    //             if (this.props.deleteStatus === 'success') {
+    //                 toast.success(
+    //                     <FormattedMessage id="manage-user.delete-success" />
+    //                 );
+
+    //                 this.props.fetchUserRedux();
+    //                 this.props.resetDeleteUser();
+    //             }
+
+    //             if (this.props.deleteStatus === 'fail') {
+    //                 toast.error(
+    //                     <FormattedMessage id="manage-user.delete-fails" />
+    //                 );
+
+    //                 this.props.resetDeleteUser();
+    //             }
+    //         }
+    //         if (prevProps.isUserUpdated !== this.props.isUserUpdated) {
+
+    //             if (this.props.isUserUpdated === 'success') {
+
+    //                 toast.success(
+    //                     this.props.intl.formatMessage({ id: "manage-user.update-success" })
+    //                 );
+
+    //                 this.handleReset();
+
+    //                 this.props.fetchUserRedux();
+
+    //                 this.props.resetUpdateUser();
+    //             }
+
+    //             if (this.props.isUserUpdated === 'fail') {
+
+    //                 toast.error(
+    //                     this.props.intl.formatMessage({ id: "manage-user.update-fails" })
+    //                 );
+
+    //                 this.props.resetUpdateUser();
+    //             }
+    //         }
+    //     }
     componentDidUpdate(prevProps) {
-
-        if (prevProps.genderRedux !== this.props.genderRedux) {
-            const arr = this.props.genderRedux;
-
-            this.setState({
-                // gender: arr?.[0]?.key || ''
-                gender: '',
-            });
+        if (prevProps.deleteStatus !== this.props.deleteStatus) {
+            console.log("LOG: deleteStatus thay đổi từ", prevProps.deleteStatus, "sang", this.props.deleteStatus);
+        }
+        if (prevProps.isUserUpdated !== this.props.isUserUpdated) {
+            console.log("LOG: isUserUpdated thay đổi từ", prevProps.isUserUpdated, "sang", this.props.isUserUpdated);
+        }
+        const isEditing = this.state.actions === CRUD_ACTIONS.EDIT;
+        // if (isEditing) return;
+        if (prevProps.genderRedux !== this.props.genderRedux && !isEditing) {
+            this.setState({ gender: '' });
         }
 
-        if (prevProps.positionRedux !== this.props.positionRedux) {
-            const arr = this.props.positionRedux;
-
-            this.setState({
-                // position: arr?.[0]?.key || ''
-                position: '',
-            });
+        if (prevProps.positionRedux !== this.props.positionRedux && !isEditing) {
+            this.setState({ position: '' });
         }
 
-        if (prevProps.roleRedux !== this.props.roleRedux) {
-            const arr = this.props.roleRedux;
-
-            this.setState({
-                // role: arr?.[0]?.key || ''
-                role: '',
-            });
+        if (prevProps.roleRedux !== this.props.roleRedux && !isEditing) {
+            this.setState({ role: '' });
         }
-        if (prevProps.listUsers !== this.props.listUsers) {
-            toast.success("Create a new user succeed!");
-            this.handleReset();
+
+        // create
+        if (prevProps.isUserCreated !== this.props.isUserCreated) {
+            if (this.props.isUserCreated === true) {
+                toast.success(
+                    this.props.intl.formatMessage({ id: "manage-user.create-success" })
+                );
+                this.handleReset();
+                this.props.resetCreateUser();
+            }
+        }
+
+        // delete
+        if (prevProps.deleteStatus !== this.props.deleteStatus
+            && this.props.deleteStatus !== 'idle'
+        ) {
+            if (this.props.deleteStatus === 'success') {
+                toast.success(<FormattedMessage id="manage-user.delete-success" />);
+                this.props.fetchUserRedux();
+                this.props.resetDeleteUser();
+            }
+
+            if (this.props.deleteStatus === 'fail') {
+                toast.error(<FormattedMessage id="manage-user.delete-fails" />);
+                this.props.resetDeleteUser();
+            }
+
+        }
+
+        // update
+        if (prevProps.isUserUpdated !== this.props.isUserUpdated
+            && this.props.isUserUpdated !== 'idle'
+        ) {
+            if (this.props.isUserUpdated === 'success') {
+                toast.success(
+                    this.props.intl.formatMessage({ id: "manage-user.update-success" })
+                );
+                this.handleReset();
+                this.props.fetchUserRedux();
+                this.props.resetEditUserRedux();
+            }
+
+            if (this.props.isUserUpdated === 'fail') {
+                toast.error(
+                    this.props.intl.formatMessage({ id: "manage-user.update-fails" })
+                );
+                this.props.resetEditUserRedux();
+            }
         }
     }
+    handleEditUserFromParent = (user) => {
 
+        this.setState({
+            email: user.email,
+            password: '*******',
+            firstName: user.firstName,
+            lastName: user.lastName,
+            address: user.address,
+            phoneNumber: user.phoneNumber,
+            gender: user.gender,
+            position: user.positionId,
+            role: user.roleId,
+            avatar: '',
+            actions: CRUD_ACTIONS.EDIT,
+            error: {},
+            userEditId: user.id
+        })
+
+    }
 
     handleReset = () => {
         this.setState({
@@ -206,7 +382,9 @@ class UserRedux extends Component {
             gender: '',
             position: '',
             role: '',
-            error: {}
+            error: {},
+            actions: CRUD_ACTIONS.CREATE,
+            userEditId: ''
         })
     }
     render() {
@@ -226,7 +404,7 @@ class UserRedux extends Component {
             email, password, firstName, lastName, address, phoneNumber,
             gender, position, role, avatar
         } = this.state
-
+        console.log("deleteStatus:", this.props.deleteStatus);
 
         return (
             <React.Fragment key={this.props.lang}>
@@ -318,7 +496,8 @@ class UserRedux extends Component {
                                                             <label className="form-label fw-semibold">
                                                                 <FormattedMessage id="manage-user.email" />
                                                             </label>
-                                                            <input type="email" className={`form-control ${this.state.error.email ? 'is-invalid' : ''}`}
+                                                            <input type="email" disabled={this.state.actions === CRUD_ACTIONS.EDIT}
+                                                                className={`form-control ${this.state.error.email ? 'is-invalid' : ''}`}
                                                                 placeholder="name@example.com"
                                                                 value={email}
                                                                 onChange={(e) => this.onChangeInput(e, 'email')}
@@ -334,7 +513,7 @@ class UserRedux extends Component {
                                                                 <FormattedMessage id="manage-user.password" />
                                                             </label>
                                                             <input type="password" className={`form-control ${this.state.error.password ? 'is-invalid' : ''}`}
-                                                                placeholder="Enter password"
+                                                                placeholder="Enter password" disabled={this.state.actions === CRUD_ACTIONS.EDIT}
                                                                 value={password}
                                                                 onChange={(e) => this.onChangeInput(e, 'password')}
                                                             />
@@ -469,10 +648,14 @@ class UserRedux extends Component {
                                                     <div className="text-center mt-4 pt-2">
                                                         <button
                                                             type="button"
-                                                            className="btn btn-primary px-3 me-2 shadow-sm"
+                                                            className={this.state.actions === CRUD_ACTIONS.EDIT ? "btn btn-warning px-3 me-2 shadow-sm" : "btn btn-primary px-3 me-2 shadow-sm"}
                                                             onClick={() => this.handleSaveUser()}
                                                         >
-                                                            <FormattedMessage id="manage-user.save" />
+                                                            {this.state.actions === CRUD_ACTIONS.EDIT ?
+                                                                <FormattedMessage id="manage-user.edit" />
+                                                                : <FormattedMessage id="manage-user.save" />
+                                                            }
+
                                                         </button>
 
                                                         <button
@@ -508,7 +691,10 @@ class UserRedux extends Component {
                                         <div className="card-body p-3">
 
                                             {/* TABLE USER */}
-                                            <TableManageUser />
+                                            <TableManageUser
+                                                handleEditUserFromParent={this.handleEditUserFromParent}
+                                                actions={this.state.actions}
+                                            />
 
                                         </div>
                                     </div>
@@ -536,7 +722,9 @@ const mapStateToProps = state => {
         isLoadingRole: state.admin.isLoadingRole,
         positionRedux: state.admin.positions,
         roleRedux: state.admin.roles,
-        listUsers: state.admin.users,
+        isUserCreated: state.admin.isUserCreated,
+        deleteStatus: state.admin.deleteStatus,
+        isUserUpdated: state.admin.isUserUpdated
 
     };
 };
@@ -549,10 +737,17 @@ const mapDispatchToProps = dispatch => {
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
         createNewUser: (data) => dispatch(actions.saveCreateUser(data)),
         fetchUserRedux: () => dispatch(actions.fetchAllUsersStart()),
+        resetCreateUser: () => dispatch(actions.resetCreateUser()),
+        deleteAUser: (userId) => dispatch(actions.deleteAUser(userId)),
+        resetDeleteUser: () => dispatch(actions.resetDeleteUser()),
+        editAUserRedux: (data) => dispatch(actions.editAUser(data)),
+        resetEditUserRedux: () => dispatch(actions.resetEditUser()),
         //  processLogout: () => dispatch(actions.processLogout()),
         changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
 
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRedux);
+export default injectIntl(
+    connect(mapStateToProps, mapDispatchToProps)(UserRedux)
+);

@@ -8,7 +8,9 @@ const initialState = {
     roles: [],
     positions: [],
     users: [],
-    isUserCreated: false
+    isUserCreated: false,
+    deleteStatus: 'idle' | 'success' | 'fail',
+    isUserUpdated: 'idle' | 'success' | 'fail',
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -97,6 +99,36 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isUserCreated: false
+            };
+        case actionTypes.DELETE_USER_SUCCESS:
+            return {
+                ...state,
+                deleteStatus: 'success'
+            };
+        case actionTypes.DELETE_USER_FAILS:
+            return {
+                ...state,
+                deleteStatus: 'fail'
+            };
+        case actionTypes.RESET_DELETE_USER:
+            return {
+                ...state,
+                deleteStatus: 'idle'
+            };
+        case actionTypes.EDIT_USER_SUCCESS:
+            return {
+                ...state,
+                isUserUpdated: 'success'
+            };
+        case actionTypes.EDIT_USER_FAILS:
+            return {
+                ...state,
+                isUserUpdated: 'fail'
+            };
+        case actionTypes.RESET_EDIT_USER:
+            return {
+                ...state,
+                isUserUpdated: 'idle'
             };
         default:
             return state;

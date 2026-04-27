@@ -61,6 +61,12 @@
             "phone": "Vui lòng nhập số điện thoại hợp lệ.",
             "email": "Vui lòng nhập địa chỉ email hợp lệ."
         },
-        "empty": "Vui lòng nhập đầy đủ thông tin."
+        "empty": "Vui lòng nhập đầy đủ thông tin.",
+        "create-success": "Tạo người dùng mới thành công!",
+        "delete-success": "Xóa người dùng thành công!",
+        "delete-fails": "Xóa người dùng thất bại!",
+        "edit": "Thay đổi",
+        "update-success": "Cập nhật thành công !",
+        "update-fails": "Cập nhật thất bại !"
     }
 }

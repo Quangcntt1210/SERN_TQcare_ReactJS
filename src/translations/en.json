@@ -62,6 +62,12 @@
             "phone": "Please enter a valid phone number.",
             "email": "Please enter a valid email address."
         },
-        "empty": "Please fill in all required information."
+        "empty": "Please fill in all required information.",
+        "create-success": "Create a new user succeed!",
+        "delete-success": "Delete user succeed !",
+        "delete-fails": "Delete user fails!",
+        "edit": "Edit User",
+        "update-success": "Update user succeed !",
+        "update-fails": "Update user fails!"
     }
 }

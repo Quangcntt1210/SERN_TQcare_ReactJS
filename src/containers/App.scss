@@ -1,1 +1,19 @@
 @import "../styles/common.scss";
+
+.Toastify__toast {
+    border-radius: 12px;
+    font-weight: 500;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.Toastify__toast--success {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.Toastify__toast--error {
+    background: linear-gradient(135deg, #ff6a6a, #ff0000);
+}
+
+.Toastify__toast-body {
+    font-size: 15px;
+}
