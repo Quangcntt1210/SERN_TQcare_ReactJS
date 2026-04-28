@@ -176,3 +176,30 @@ body {
         }
     }
 }
+
+
+//bo loc
+
+.filter-section {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+
+    .form-control {
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        height: 38px;
+
+        &:focus {
+            border-color: $light-blue;
+            box-shadow: 0 0 0 0.2rem rgba($light-blue, 0.15);
+        }
+    }
+
+    select.form-control {
+        cursor: pointer;
+    }
+}

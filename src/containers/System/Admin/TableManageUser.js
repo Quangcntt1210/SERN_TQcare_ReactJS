@@ -10,8 +10,8 @@ class TableManageUser extends Component {
         super(props);
         this.state = {
             userRedux: [],
-            activePage: 1, // Trang hiện tại
-            itemsCountPerPage: 5 // Số bản ghi trên mỗi trang
+            activePage: 1,
+            itemsCountPerPage: 5
         }
     }
 
@@ -109,6 +109,8 @@ class TableManageUser extends Component {
         );
     }
 }
+
+
 
 const mapStateToProps = state => ({
     listUsers: state.admin.users,
