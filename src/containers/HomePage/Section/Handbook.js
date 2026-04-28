@@ -68,13 +68,25 @@ class Handbook extends Component {
                     </div>
 
                     <Swiper
-                        slidesPerView={2}
+                        // slidesPerView={2}  <-- XÓA DÒNG NÀY
                         spaceBetween={20}
                         loop={true}
                         pagination={{ clickable: true }}
                         navigation={true}
                         modules={[Pagination, Navigation]}
                         className="mySwiper"
+                        breakpoints={{
+                            // Màn hình Mobile (< 768px): Chỉ hiện 1 tin để ảnh và chữ có đủ chỗ
+                            0: {
+                                slidesPerView: 1,
+                                spaceBetween: 10
+                            },
+                            // Màn hình Tablet/Desktop (>= 768px): Hiện 2 tin như thiết kế của bạn
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 20
+                            }
+                        }}
                     >
                         {Handbooks.map((item) => (
                             <SwiperSlide key={item.id}>

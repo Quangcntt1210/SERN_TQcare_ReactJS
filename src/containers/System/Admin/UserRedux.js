@@ -537,12 +537,12 @@ class UserRedux extends Component {
 
         if (user.image && user.image.data) {
 
+            imageBase64 = CommonUtils.getBase64FromBuffer(user.image.data);
+            // const base64String = new TextDecoder().decode(
+            //     new Uint8Array(user.image.data)
+            // );
 
-            const base64String = new TextDecoder().decode(
-                new Uint8Array(user.image.data)
-            );
-
-            imageBase64 = base64String;
+            // imageBase64 = base64String;
         }
 
         this.setState({
@@ -779,7 +779,7 @@ class UserRedux extends Component {
                                                                     {language === LANGUAGE.VI ? '--- Chọn vai trò ---' : '--- Choose role ---'}
                                                                 </option>
                                                                 {getRole && getRole.length > 0 && getRole.map((item, index) => (
-                                                                    <option key={index} value={item.key}>
+                                                                    <option key={index} value={item.keyMap}>
                                                                         {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
                                                                     </option>
                                                                 ))}
@@ -815,7 +815,7 @@ class UserRedux extends Component {
                                                                     {language === LANGUAGE.VI ? '--- Chọn vị trí ---' : '--- Choose position ---'}
                                                                 </option>
                                                                 {getPosition && getPosition.length > 0 && getPosition.map((item, index) => (
-                                                                    <option key={index} value={item.key}>
+                                                                    <option key={index} value={item.keyMap}>
                                                                         {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
                                                                     </option>
                                                                 ))}
@@ -831,7 +831,7 @@ class UserRedux extends Component {
                                                                     {language === LANGUAGE.VI ? '--- Chọn giới tính ---' : '--- Choose gender ---'}
                                                                 </option>
                                                                 {getGender && getGender.length > 0 && getGender.map((item, index) => (
-                                                                    <option key={index} value={item.key}>
+                                                                    <option key={index} value={item.keyMap}>
                                                                         {language === LANGUAGE.VI ? item.valueVi : item.valueEn}
                                                                     </option>
                                                                 ))}

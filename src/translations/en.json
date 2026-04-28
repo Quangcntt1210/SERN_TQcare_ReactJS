@@ -39,7 +39,9 @@
         "medical-tests": "Medical tests",
         "mental-health": "Mental health",
         "general-checkup": "General health check-up",
-        "dental-exam": "Dental examination"
+        "dental-exam": "Dental examination",
+        "top-doctor": "Top doctors of the week",
+        "more-info": "More info"
     },
     "manage-user": {
         "add": "ADD NEW USER",

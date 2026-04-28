@@ -24,30 +24,51 @@
     .mySwiper {
         width: 100%;
         height: auto;
-        padding: 20px 10px 40px 10px;
+        padding: 20px 10px 50px 10px;
 
         .swiper-slide {
             @extend .card-item;
-            //them
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #ebebeb;
+            padding: 12px;
+            cursor: pointer;
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                 box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-            // them
             &:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
                 border-color: #45c3d2;
+
+                .bg-image {
+                    filter: brightness(1.05);
+                }
             }
 
             .bg-image {
                 @extend .card-image;
+                width: 100%;
+                height: 140px;
+                border-radius: 8px;
+                background-size: cover;
+                background-position: center;
+                margin-bottom: 15px;
+                transition: filter 0.3s ease;
             }
 
-            span {
+            .medical-name {
                 @extend .card-text;
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+                text-align: center;
+                display: block;
+                padding: 0 5px;
+                line-height: 1.4;
+                min-height: 45px; // Giúp các slide có độ cao text bằng nhau
             }
         }
-
 
         .swiper-button-next,
         .swiper-button-prev {
@@ -69,9 +90,9 @@
             }
 
             &:hover {
-                --swiper-navigation-color: #5f5f5f;
-                background: #c5c2c2;
-                border-color: #010101;
+                --swiper-navigation-color: #fff;
+                background: #45c3d2;
+                border-color: #45c3d2;
             }
         }
 
@@ -81,6 +102,7 @@
             &-active {
                 width: 20px;
                 background: #45c3d2;
+                border-radius: 5px;
             }
         }
     }

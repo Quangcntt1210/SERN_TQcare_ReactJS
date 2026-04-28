@@ -11,6 +11,7 @@ const initialState = {
     isUserCreated: false,
     deleteStatus: 'idle' | 'success' | 'fail',
     isUserUpdated: 'idle' | 'success' | 'fail',
+    topDoctors: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -129,6 +130,17 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isUserUpdated: 'idle'
+            };
+        case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
+            return {
+                ...state,
+                topDoctors: action.dataDoctors
+                // topDoctors: [...action.dataDoctors]
+            };
+        case actionTypes.FETCH_TOP_DOCTOR_FAILS:
+            return {
+                ...state,
+                topDoctors: []
             };
         default:
             return state;

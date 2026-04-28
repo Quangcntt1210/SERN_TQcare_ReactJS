@@ -39,7 +39,9 @@
         "medical-tests": "Xét nghiệm y học",
         "mental-health": "Sức khỏe tinh thần",
         "general-checkup": "Khám sức khỏe tổng quát",
-        "dental-exam": "Khám nha khoa"
+        "dental-exam": "Khám nha khoa",
+        "top-doctor": "Bác sĩ nổi bật tuần qua",
+        "more-info": "Xem thêm"
     },
     "manage-user": {
         "add": "THÊM NGƯỜI DÙNG MỚI",

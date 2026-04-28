@@ -6,16 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import coxuongkhop from '../../../assets/specialty/cocuongkhop.png';
 import { Pagination, Navigation } from 'swiper/modules';
 
-
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+
 class Medical extends Component {
-
     render() {
-
-
         return (
             <div className='section-medical'>
                 <div className='medical-content'>
@@ -25,82 +21,46 @@ class Medical extends Component {
                     </div>
                     <div className='medical-body'>
                         <Swiper
-                            slidesPerView={4}
                             spaceBetween={20}
                             loop={true}
-                            pagination={{
-                                clickable: true,
-                            }}
+                            pagination={{ clickable: true }}
                             navigation={true}
                             modules={[Pagination, Navigation]}
                             className="mySwiper"
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 15
+                                },
+                                1024: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 20
+                                }
+                            }}
                         >
-
-                            <SwiperSlide className='medical-xuongkhop'>
-                                <div
-                                    className="bg-image"
-                                    style={{ backgroundImage: `url(${coxuongkhop})` }}
-                                ></div>
-                                <span> Bệnh viện đa khoa An Việt</span>
-                            </SwiperSlide>
-
-                            <SwiperSlide>
-                                <div
-                                    className="bg-image"
-                                    style={{ backgroundImage: `url(${coxuongkhop})` }}
-                                ></div>
-                                <span> Bệnh viện đa khoa An Việt</span>
-                            </SwiperSlide>
-
-                            <SwiperSlide>
-                                <div
-                                    className="bg-image"
-                                    style={{ backgroundImage: `url(${coxuongkhop})` }}
-                                ></div>
-                                <span> Bệnh viện đa khoa An Việt</span>
-                            </SwiperSlide>
-
-                            <SwiperSlide>
-                                <div
-                                    className="bg-image"
-                                    style={{ backgroundImage: `url(${coxuongkhop})` }}
-                                ></div>
-                                <span> Bệnh viện đa khoa An Việt</span>
-                            </SwiperSlide>
-
-                            <SwiperSlide>
-                                <div
-                                    className="bg-image"
-                                    style={{ backgroundImage: `url(${coxuongkhop})` }}
-                                ></div>
-                                <span> Bệnh viện đa khoa An Việt</span>
-                            </SwiperSlide>
-
-                            <SwiperSlide>
-                                <div
-                                    className="bg-image"
-                                    style={{ backgroundImage: `url(${coxuongkhop})` }}
-                                ></div>
-                                <span> Bệnh viện đa khoa An Việt</span>
-                            </SwiperSlide>
+                            {[1, 2, 3, 4, 5, 6].map((item, index) => (
+                                <SwiperSlide key={index}>
+                                    <div
+                                        className="bg-image"
+                                        style={{ backgroundImage: `url(${coxuongkhop})` }}
+                                    ></div>
+                                    <span className="medical-name">Bệnh viện đa khoa An Việt</span>
+                                </SwiperSlide>
+                            ))}
                         </Swiper>
                     </div>
                 </div>
             </div>
         );
     }
-
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.user.isLoggedIn
-    };
-};
+const mapStateToProps = state => ({
+    isLoggedIn: state.user.isLoggedIn
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Medical);
+export default connect(mapStateToProps)(Medical);
