@@ -41,7 +41,12 @@
         "general-checkup": "General health check-up",
         "dental-exam": "Dental examination",
         "top-doctor": "Top doctors of the week",
-        "more-info": "More info"
+        "more-info": "More info",
+        "about-header": "What is TQCare?",
+        "about-sub-title": "Smart Healthcare Platform",
+        "about-desc-1": "TQCare is a modern healthcare platform designed to connect patients with doctors quickly and efficiently. We provide online consultation, appointment booking, and personalized medical services.",
+        "about-desc-2": "Our mission is to make healthcare more accessible, transparent, and convenient for everyone in the digital age.",
+        "about-learn-more": "Learn More"
     },
     "manage-user": {
         "add": "ADD NEW USER",

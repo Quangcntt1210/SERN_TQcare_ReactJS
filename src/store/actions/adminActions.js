@@ -207,7 +207,7 @@ export const resetEditUser = () => ({
 
 export const fetchTopDoctorHome = (limit) => async (dispatch, getState) => {
     try {
-        let resDoctor = await getTopDoctorHome('10');
+        let resDoctor = await getTopDoctorHome('15');
         if (resDoctor && resDoctor.errorCode === 0) {
             let data = resDoctor.data;
             if (data && data.length > 0) {

@@ -105,7 +105,7 @@ class Doctor extends Component {
 
 
                                         <Link to={item.link} className="doctor-name">
-                                            {item.firstName} {item.lastName}
+                                            {item.lastName} {item.firstName}
                                         </Link>
 
                                         <div className="specialty">Chuyên khoa</div>

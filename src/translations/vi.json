@@ -41,7 +41,12 @@
         "general-checkup": "Khám sức khỏe tổng quát",
         "dental-exam": "Khám nha khoa",
         "top-doctor": "Bác sĩ nổi bật tuần qua",
-        "more-info": "Xem thêm"
+        "more-info": "Xem thêm",
+        "about-header": "TQCare là gì?",
+        "about-sub-title": "Nền tảng y tế thông minh",
+        "about-desc-1": "TQCare là nền tảng y tế hiện đại được thiết kế để kết nối bệnh nhân với bác sĩ một cách nhanh chóng và hiệu quả. Chúng tôi cung cấp dịch vụ tư vấn trực tuyến, đặt lịch khám và các dịch vụ y tế cá nhân hóa.",
+        "about-desc-2": "Sứ mệnh của chúng tôi là làm cho dịch vụ chăm sóc sức khỏe trở nên dễ tiếp cận, minh bạch và thuận tiện hơn cho tất cả mọi người trong kỷ nguyên số.",
+        "about-learn-more": "Tìm hiểu thêm"
     },
     "manage-user": {
         "add": "THÊM NGƯỜI DÙNG MỚI",
