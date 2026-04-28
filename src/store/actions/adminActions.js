@@ -10,7 +10,7 @@ export const fetchGenderStart = () => async (dispatch, getState) => {
 
         let res = await getAllcodeService('gender');
 
-        if (res && res.errCode === 0) {
+        if (res && res.errorCode === 0) {
             dispatch(fetchGenderSuccess(res.data));
         } else {
             dispatch(fetchGenderFails());
@@ -38,7 +38,7 @@ export const fetchPositionStart = () => async (dispatch, getState) => {
 
         let res = await getAllcodeService('position');
 
-        if (res && res.errCode === 0) {
+        if (res && res.errorCode === 0) {
             dispatch(fetchPositionSuccess(res.data));
         } else {
             dispatch(fetchPositionFails());
@@ -65,7 +65,7 @@ export const fetchRoleStart = () => async (dispatch, getState) => {
 
         let res = await getAllcodeService('role');
 
-        if (res && res.errCode === 0) {
+        if (res && res.errorCode === 0) {
             dispatch(fetchRoleSuccess(res.data));
         } else {
             dispatch(fetchRoleFails());
@@ -89,7 +89,7 @@ export const saveCreateUser = (data) => async (dispatch, getState) => {
     try {
         let res = await createNewUserService(data);
 
-
+        console.log("CREATE USER RESPONSE:", res);
         if (res && res.errorCode === 0) {
             dispatch(saveUserSuccess());
             dispatch(fetchAllUsersStart());
