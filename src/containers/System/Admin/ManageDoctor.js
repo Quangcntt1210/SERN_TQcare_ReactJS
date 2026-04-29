@@ -22,20 +22,23 @@ class ManageDoctor extends Component {
             contentHTML: '',
             selectedDoctor: null,
             description: '',
-            listDoctor: []
+            // listDoctor: []
         }
     }
 
     componentDidMount() {
-        this.props.fetchAllDoctorRedux();
+        this.interval = setInterval(() => {
+            this.props.fetchAllDoctorRedux();
+        }, 10000);
     }
-    componentDidUpdate(prevProps) {
-        if (prevProps.allDoctors !== this.props.allDoctors && this.props.allDoctors.length > 0) {
-            this.setState({
-                listDoctor: this.props.allDoctors
-            });
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.allDoctors !== this.props.allDoctors && this.props.allDoctors.length > 0) {
+    //         let dataSelect = this.buildDataInputSelected(this.props.allDoctors);
+    //         this.setState({
+    //             listDoctor: dataSelect
+    //         });
+    //     }
+    // }
     handleEditorChange = ({ html, text }) => {
         this.setState({
             contentMarkdown: text,
@@ -115,7 +118,8 @@ class ManageDoctor extends Component {
                             <Select
                                 value={this.state.selectedDoctor}
                                 onChange={this.handleChangeDoctor}
-                                options={this.buildDataInputSelected(this.state.listDoctor)}
+                                options={this.buildDataInputSelected(this.props.allDoctors)}
+                                // options={this.state.listDoctor}
                                 classNamePrefix="react-select"
                                 placeholder={intl.formatMessage({ id: 'manage-doctor.doctor-search' })}
                             />
