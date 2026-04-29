@@ -29,13 +29,12 @@ class ManageDoctor extends Component {
     componentDidMount() {
         this.props.fetchAllDoctorRedux();
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.allDoctors !== this.props.allDoctors) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.allDoctors !== this.props.allDoctors && this.props.allDoctors.length > 0) {
             this.setState({
                 listDoctor: this.props.allDoctors
             });
         }
-
     }
     handleEditorChange = ({ html, text }) => {
         this.setState({
@@ -44,10 +43,38 @@ class ManageDoctor extends Component {
         });
     }
 
-    handleSaveContentMarkdown = () => {
-        console.log('check state', this.state);
-    }
+    buildDataInputSelected = (inputData) => {
+        const { lang } = this.props;
+        let result = [];
 
+        if (inputData && inputData.length > 0) {
+            result = inputData.map(item => ({
+                label: lang === LANGUAGE.VI
+                    ? `${item.lastName} ${item.firstName}`
+                    : `${item.firstName} ${item.lastName}`,
+                value: item.id
+            }));
+        }
+
+        return result;
+    }
+    handleSaveContentMarkdown = () => {
+        const { selectedDoctor, contentHTML, contentMarkdown, description } = this.state;
+
+        if (!selectedDoctor) {
+            alert("Please select doctor");
+            return;
+        }
+
+        let data = {
+            doctorId: selectedDoctor.value,
+            contentHTML,
+            contentMarkdown,
+            description
+        };
+
+        console.log('DATA SEND:', data);
+    }
     handleChangeDoctor = (selectedDoctor) => {
         this.setState({ selectedDoctor }, () =>
             console.log(`Doctor selected:`, this.state.selectedDoctor)
@@ -88,12 +115,7 @@ class ManageDoctor extends Component {
                             <Select
                                 value={this.state.selectedDoctor}
                                 onChange={this.handleChangeDoctor}
-                                options={this.state.listDoctor.map(doctor => ({
-                                    label: this.props.lang === LANGUAGE.VI
-                                        ? doctor.lastName + ' ' + doctor.firstName
-                                        : doctor.firstName + ' ' + doctor.lastName,
-                                    value: doctor.id
-                                }))}
+                                options={this.buildDataInputSelected(this.state.listDoctor)}
                                 classNamePrefix="react-select"
                                 placeholder={intl.formatMessage({ id: 'manage-doctor.doctor-search' })}
                             />
@@ -119,7 +141,8 @@ class ManageDoctor extends Component {
                     <div className="action-buttons">
                         <button
                             className="btn-save"
-                            onClick={() => this.handleSaveContentMarkdown()}
+                            disabled={!this.state.selectedDoctor}
+                            onClick={this.handleSaveContentMarkdown}
                         >
                             <i className="fas fa-save"></i> <FormattedMessage id="manage-doctor.save" />
                         </button>
