@@ -2,7 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './tableManageUser.scss';
 import * as actions from '../../../store/actions';
-import Pagination from "react-js-pagination"; // Import thư viện
+import Pagination from "react-js-pagination"; //  thư viện
+
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+// import style manually
+import 'react-markdown-editor-lite/lib/index.css';
+
+// Register plugins if required
+// MdEditor.use(YOUR_PLUGINS_HERE);
+
+// Initialize a markdown parser
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+// Finish!
+function handleEditorChange({ html, text }) {
+    console.log('handleEditorChange', html, text);
+}
+
+
 
 class TableManageUser extends Component {
 
@@ -93,7 +111,7 @@ class TableManageUser extends Component {
                     </table>
                 </div>
 
-                {/* Phần hiển thị phân trang */}
+
                 <div className="custom-pagination mt-3 d-flex justify-content-center">
                     <Pagination
                         activePage={this.state.activePage}
@@ -105,6 +123,7 @@ class TableManageUser extends Component {
                         linkClass="page-link"
                     />
                 </div>
+                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
             </div>
         );
     }
