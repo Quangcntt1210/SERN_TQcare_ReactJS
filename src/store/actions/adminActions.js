@@ -2,7 +2,8 @@ import actionTypes from './actionTypes';
 import {
     createNewUserService, getAllcodeService,
     getAllUsers, deleteUserService,
-    editUserService, getTopDoctorHome
+    editUserService, getTopDoctorHome,
+    getAllDoctor
 } from '../../services/userService';
 import { set } from 'lodash';
 import { toast } from "react-toastify";
@@ -236,4 +237,27 @@ export const fetchTopDoctorSuccess = (data) => ({
 })
 export const fetchTopDoctorFails = () => ({
     type: actionTypes.FETCH_TOP_DOCTOR_FAILS
+})
+
+
+export const fetchAllDoctors = () => async (dispatch, getState) => {
+    try {
+        let res = await getAllDoctor();
+        if (res && res.errorCode === 0) {
+            dispatch(fetchAllDoctorSuccess(res.data));
+        } else {
+            dispatch(fetchAllDoctorFails());
+        }
+    } catch (error) {
+        dispatch(fetchAllDoctorFails());
+        console.log('fetch all doctor fails', error);
+    }
+};
+
+export const fetchAllDoctorSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,
+    dataDoctors: data
+})
+export const fetchAllDoctorFails = () => ({
+    type: actionTypes.FETCH_ALL_DOCTOR_FAILS
 })

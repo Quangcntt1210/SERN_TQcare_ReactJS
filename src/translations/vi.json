@@ -84,6 +84,10 @@
         "select-clinic": "Chọn phòng khám",
         "info": "Thông tin chi tiết",
         "save": "Lưu",
-        "typing": "Đang soạn thảo"
+        "typing": "Đang soạn thảo",
+        "infor": "Thông tin giới thiệu",
+        "select-doctor": "Chọn bác sĩ",
+        "doctor-description": "Nhập mô tả ngắn gọn về bác sĩ...",
+        "doctor-search": "Tìm kiếm bác sĩ..."
     }
 }

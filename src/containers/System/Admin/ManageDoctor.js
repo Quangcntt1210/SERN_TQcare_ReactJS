@@ -9,17 +9,9 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import './manageDoctor.scss';
 import Select from 'react-select';
-
+import { injectIntl } from 'react-intl';
 const mdParser = new MarkdownIt();
-const options = [
 
-    { value: 'chocolate', label: 'Chocolate' },
-
-    { value: 'strawberry', label: 'Strawberry' },
-
-    { value: 'vanilla', label: 'Vanilla' },
-
-];
 
 
 class ManageDoctor extends Component {
@@ -30,9 +22,21 @@ class ManageDoctor extends Component {
             contentHTML: '',
             selectedDoctor: null,
             description: '',
+            listDoctor: []
         }
     }
 
+    componentDidMount() {
+        this.props.fetchAllDoctorRedux();
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.allDoctors !== this.props.allDoctors) {
+            this.setState({
+                listDoctor: this.props.allDoctors
+            });
+        }
+
+    }
     handleEditorChange = ({ html, text }) => {
         this.setState({
             contentMarkdown: text,
@@ -58,6 +62,7 @@ class ManageDoctor extends Component {
     }
 
     render() {
+        const { intl } = this.props;
         return (
             <React.Fragment key={this.props.lang}>
                 <div className="manage-doctor-container">
@@ -68,24 +73,29 @@ class ManageDoctor extends Component {
 
                     <div className='more-infor'>
                         <div className='content-left'>
-                            <label>Thông tin giới thiệu</label>
+                            <label><FormattedMessage id="manage-doctor.infor" /></label>
                             <textarea
 
                                 onChange={(event) => this.handleOnChangeDescription(event)}
                                 value={this.state.description}
                                 className="more-info-textarea"
-                                placeholder="Nhập mô tả ngắn gọn về bác sĩ..."
+                                placeholder={intl.formatMessage({ id: 'manage-doctor.doctor-description' })}
                             />
                         </div>
 
                         <div className='content-right'>
-                            <label>Chọn bác sĩ</label>
+                            <label><FormattedMessage id="manage-doctor.select-doctor" /></label>
                             <Select
                                 value={this.state.selectedDoctor}
                                 onChange={this.handleChangeDoctor}
-                                options={options}
+                                options={this.state.listDoctor.map(doctor => ({
+                                    label: this.props.lang === LANGUAGE.VI
+                                        ? doctor.lastName + ' ' + doctor.firstName
+                                        : doctor.firstName + ' ' + doctor.lastName,
+                                    value: doctor.id
+                                }))}
                                 classNamePrefix="react-select"
-                                placeholder="Tìm kiếm bác sĩ..."
+                                placeholder={intl.formatMessage({ id: 'manage-doctor.doctor-search' })}
                             />
                         </div>
                     </div>
@@ -122,10 +132,14 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = state => ({
     lang: state.app.language,
+    allDoctors: state.admin.allDoctors
 });
 
 const mapDispatchToProps = dispatch => ({
-    changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+    changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+    fetchAllDoctorRedux: () => dispatch(actions.fetchAllDoctors())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageDoctor);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    injectIntl(ManageDoctor)
+);

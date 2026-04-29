@@ -85,6 +85,10 @@
         "select-clinic": "Select clinic",
         "info": "Detailed information",
         "save": "Save",
-        "typing": "Typing..."
+        "typing": "Typing...",
+        "infor": "Introduction information",
+        "select-doctor": "Select doctor",
+        "doctor-description": "Enter a brief description about the doctor...",
+        "doctor-search": "Search for doctor..."
     }
 }
