@@ -1,0 +1,27 @@
+.product-manage-container {
+    .title-manage-user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 35px !important;
+        font-size: 30px !important;
+        font-weight: 800 !important;
+        color: #007bff !important;
+        width: 100%;
+
+        i {
+            color: #007bff;
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50% !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+    }
+}

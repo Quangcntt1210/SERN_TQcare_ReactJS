@@ -11,7 +11,7 @@ import { get, set } from 'lodash';
 import TableManageUser from './TableManageUser';
 import { toast } from "react-toastify";
 import { injectIntl } from 'react-intl';
-
+import './userRedux.scss';
 
 class UserRedux extends Component {
 
@@ -117,86 +117,7 @@ class UserRedux extends Component {
 
         }
     }
-    // checkValidateInput = () => {
-    //     let error = {};
 
-    //     const fields = [
-    //         'email',
-    //         'password',
-    //         'firstName',
-    //         'lastName',
-    //         'address',
-    //         'phoneNumber',
-    //         'gender',
-    //         'position',
-    //         'role'
-    //     ];
-
-    //     for (let i = 0; i < fields.length; i++) {
-    //         let field = fields[i];
-    //         let value = this.state[field];
-
-    //         switch (field) {
-    //             case 'email':
-    //                 if (!value) {
-    //                     error.email = 'manage-user.validate.required';
-    //                 } else {
-    //                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //                     if (!emailRegex.test(value)) {
-    //                         error.email = 'manage-user.validate.email';
-    //                     }
-    //                 }
-    //                 break;
-
-    //             // case 'password':
-    //             //     if (!value) {
-    //             //         error.password = 'manage-user.validate.required';
-    //             //     } else {
-    //             //         const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    //             //         if (!passwordRegex.test(value)) {
-    //             //             error.password = 'manage-user.validate.password';
-    //             //         }
-    //             //     }
-    //             //     break;
-    //             case 'password':
-    //                 if (this.state.actions !== CRUD_ACTIONS.EDIT) {
-    //                     if (!value) {
-    //                         error.password = 'manage-user.validate.required';
-    //                     } else {
-    //                         const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    //                         if (!passwordRegex.test(value)) {
-    //                             error.password = 'manage-user.validate.password';
-    //                         }
-    //                     }
-    //                 }
-    //                 break;
-
-    //             case 'phoneNumber':
-    //                 if (!value) {
-    //                     error.phoneNumber = 'manage-user.validate.required';
-    //                 } else {
-    //                     const phoneRegex = /^(0|\+84)[0-9]{9}$/;
-    //                     if (!phoneRegex.test(value)) {
-    //                         error.phoneNumber = 'manage-user.validate.phone';
-    //                     }
-    //                 }
-    //                 break;
-
-    //             default:
-    //                 if (!value) {
-    //                     error[field] = 'manage-user.validate.required';
-    //                 }
-    //                 break;
-    //         }
-
-
-    //         if (Object.keys(error).length > 0) break;
-    //     }
-
-    //     this.setState({ error });
-
-    //     return Object.keys(error).length === 0;
-    // };
     checkValidateInput = () => {
         let error = {};
 
@@ -269,166 +190,7 @@ class UserRedux extends Component {
         })
     }
 
-    //v1
-    //     componentDidUpdate(prevProps) {
 
-    //       if (prevProps.genderRedux !== this.props.genderRedux && this.state.actions !== CRUD_ACTIONS.EDIT) {
-    //     this.setState({ gender: '' });
-    // }
-    //         //     const arr = this.props.genderRedux;
-
-    //         //     this.setState({
-    //         //         // gender: arr?.[0]?.key || ''
-    //         //         gender: '',
-    //         //     });
-    //         // }
-
-    //         if (prevProps.positionRedux !== this.props.positionRedux) {
-    //             const arr = this.props.positionRedux;
-
-    //             this.setState({
-    //                 // position: arr?.[0]?.key || ''
-    //                 position: '',
-    //             });
-    //         }
-
-    //         if (prevProps.roleRedux !== this.props.roleRedux) {
-    //             const arr = this.props.roleRedux;
-
-    //             this.setState({
-    //                 // role: arr?.[0]?.key || ''
-    //                 role: '',
-    //             });
-    //         }
-    //         // if (prevProps.listUsers !== this.props.listUsers) {
-
-    //         //     this.handleReset();
-    //         // }
-    //         if (prevProps.isUserCreated !== this.props.isUserCreated) {
-    //             if (this.props.isUserCreated === true) {
-
-    //                 toast.success(
-    //                     this.props.intl.formatMessage({ id: "manage-user.create-success" })
-    //                 );
-
-    //                 this.handleReset();
-
-    //                 this.props.resetCreateUser();
-
-    //             }
-    //         }
-    //         // SUCCESS
-    //         if (prevProps.deleteStatus !== this.props.deleteStatus) {
-
-    //             if (this.props.deleteStatus === 'success') {
-    //                 toast.success(
-    //                     <FormattedMessage id="manage-user.delete-success" />
-    //                 );
-
-    //                 this.props.fetchUserRedux();
-    //                 this.props.resetDeleteUser();
-    //             }
-
-    //             if (this.props.deleteStatus === 'fail') {
-    //                 toast.error(
-    //                     <FormattedMessage id="manage-user.delete-fails" />
-    //                 );
-
-    //                 this.props.resetDeleteUser();
-    //             }
-    //         }
-    //         if (prevProps.isUserUpdated !== this.props.isUserUpdated) {
-
-    //             if (this.props.isUserUpdated === 'success') {
-
-    //                 toast.success(
-    //                     this.props.intl.formatMessage({ id: "manage-user.update-success" })
-    //                 );
-
-    //                 this.handleReset();
-
-    //                 this.props.fetchUserRedux();
-
-    //                 this.props.resetUpdateUser();
-    //             }
-
-    //             if (this.props.isUserUpdated === 'fail') {
-
-    //                 toast.error(
-    //                     this.props.intl.formatMessage({ id: "manage-user.update-fails" })
-    //                 );
-
-    //                 this.props.resetUpdateUser();
-    //             }
-    //         }
-    //     }
-
-    //V2
-    // componentDidUpdate(prevProps) {
-
-    //     const isEditing = this.state.actions === CRUD_ACTIONS.EDIT;
-    //     if (isEditing) return;
-    //     if (prevProps.genderRedux !== this.props.genderRedux && !isEditing) {
-    //         this.setState({ gender: '' });
-    //     }
-
-    //     if (prevProps.positionRedux !== this.props.positionRedux && !isEditing) {
-    //         this.setState({ position: '' });
-    //     }
-
-    //     if (prevProps.roleRedux !== this.props.roleRedux && !isEditing) {
-    //         this.setState({ role: '' });
-    //     }
-
-    //     // create
-    //     if (prevProps.isUserCreated !== this.props.isUserCreated) {
-    //         if (this.props.isUserCreated === true) {
-    //             toast.success(
-    //                 this.props.intl.formatMessage({ id: "manage-user.create-success" })
-    //             );
-    //             this.handleReset();
-    //             this.props.resetCreateUser();
-    //         }
-    //     }
-
-    //     // delete
-    //     if (prevProps.deleteStatus !== this.props.deleteStatus
-    //         && this.props.deleteStatus !== 'idle'
-    //     ) {
-    //         if (this.props.deleteStatus === 'success') {
-    //             toast.success(<FormattedMessage id="manage-user.delete-success" />);
-    //             this.props.fetchUserRedux();
-    //             this.props.resetDeleteUser();
-    //         }
-
-    //         if (this.props.deleteStatus === 'fail') {
-    //             toast.error(<FormattedMessage id="manage-user.delete-fails" />);
-    //             this.props.resetDeleteUser();
-    //         }
-
-    //     }
-
-    //     // update
-    //     if (prevProps.isUserUpdated !== this.props.isUserUpdated
-    //         && this.props.isUserUpdated !== 'idle'
-    //     ) {
-    //         if (this.props.isUserUpdated === 'success') {
-    //             toast.success(
-    //                 this.props.intl.formatMessage({ id: "manage-user.update-success" })
-    //             );
-    //             this.handleReset();
-    //             this.props.fetchUserRedux();
-    //             this.props.resetEditUserRedux();
-    //         }
-
-    //         if (this.props.isUserUpdated === 'fail') {
-    //             toast.error(
-    //                 this.props.intl.formatMessage({ id: "manage-user.update-fails" })
-    //             );
-    //             this.props.resetEditUserRedux();
-    //         }
-    //     }
-    // }
     componentDidUpdate(prevProps) {
 
         const isEditing = this.state.actions === CRUD_ACTIONS.EDIT;
@@ -496,53 +258,14 @@ class UserRedux extends Component {
             this.props.resetEditUserRedux();
         }
     }
-    // handleEditUserFromParent = (user) => {
-    //     let imageBase64 = '';
-    //     if (user.image && user.image.data) {
 
-    //         imageBase64 = btoa(
-    //             new Uint8Array(user.image.data).reduce(
-    //                 (data, byte) => data + String.fromCharCode(byte),
-    //                 ''
-    //             )
-    //         );
-
-
-    //         // imageBase64 = `data:image/binary;base64,${imageBase64}`;
-    //         imageBase64 = `data:image/png;base64,${imageBase64}`
-    //     }
-
-    //     this.setState({
-    //         email: user.email,
-    //         password: '*******',
-    //         firstName: user.firstName,
-    //         lastName: user.lastName,
-    //         address: user.address,
-    //         phoneNumber: user.phoneNumber,
-    //         gender: user.gender,
-    //         position: user.positionId,
-    //         role: user.roleId,
-    //         avatar: '',
-    //         previewImg: imageBase64,
-    //         actions: CRUD_ACTIONS.EDIT,
-    //         error: {},
-    //         userEditId: user.id
-    //     }, () => {
-    //         console.log('State after reset:', this.state);
-    //     })
-
-    // }
     handleEditUserFromParent = (user) => {
         let imageBase64 = '';
 
         if (user.image && user.image.data) {
 
             imageBase64 = CommonUtils.getBase64FromBuffer(user.image.data);
-            // const base64String = new TextDecoder().decode(
-            //     new Uint8Array(user.image.data)
-            // );
 
-            // imageBase64 = base64String;
         }
 
         this.setState({
@@ -606,7 +329,7 @@ class UserRedux extends Component {
                 {isLoadingGender || isLoadingPosition || isLoadingRole ? (
                     <div className="text-center py-5">
                         <div className="spinner-border text-primary" role="status" />
-                        <p className="mt-3">Loading data...</p>
+                        <p className="mt-3"> <FormattedMessage id="manage-user.loading-data" /></p>
                     </div>
                 ) : (
                     <div className='product-manage-container'>
@@ -617,7 +340,8 @@ class UserRedux extends Component {
                                     <div className="col-md-8">
                                         <div className="card shadow-sm border-0">
                                             <div className="card-body p-4">
-                                                <h3 className="text-center mb-4 fw-bold text-primary" >
+
+                                                <h3 className="text-center mb-4 fw-bold text-primary title-manage-user" >
                                                     <FormattedMessage id="manage-user.add" />
                                                 </h3>
 

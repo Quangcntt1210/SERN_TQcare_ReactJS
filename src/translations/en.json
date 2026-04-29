@@ -49,7 +49,7 @@
         "about-learn-more": "Learn More"
     },
     "manage-user": {
-        "add": "ADD NEW USER",
+        "add": "Add new user",
         "upload-img": "Upload profile picture",
         "email": "Email address",
         "password": "Password",
@@ -75,6 +75,16 @@
         "delete-fails": "Delete user fails!",
         "edit": "Edit User",
         "update-success": "Update user succeed !",
-        "update-fails": "Update user fails!"
+        "update-fails": "Update user fails!",
+        "loading-data": "Loading data..."
+    },
+    "manage-doctor": {
+        "title": "Manage doctor information",
+        "select-doctor": "Select doctor",
+        "select-specialty": "Select specialty",
+        "select-clinic": "Select clinic",
+        "info": "Detailed information",
+        "save": "Save",
+        "typing": "Typing..."
     }
 }

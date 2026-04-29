@@ -49,7 +49,7 @@
         "about-learn-more": "Tìm hiểu thêm"
     },
     "manage-user": {
-        "add": "THÊM NGƯỜI DÙNG MỚI",
+        "add": "Thêm người dùng mới",
         "upload-img": "Tải hình ảnh",
         "email": " Địa chỉ Email",
         "password": "Mật khẩu",
@@ -74,6 +74,16 @@
         "delete-fails": "Xóa người dùng thất bại!",
         "edit": "Thay đổi",
         "update-success": "Cập nhật thành công !",
-        "update-fails": "Cập nhật thất bại !"
+        "update-fails": "Cập nhật thất bại !",
+        "loading-data": "Đang tải dữ liệu..."
+    },
+    "manage-doctor": {
+        "title": "Quản lý thông tin bác sĩ",
+        "select-doctor": "Chọn bác sĩ",
+        "select-specialty": "Chọn chuyên khoa",
+        "select-clinic": "Chọn phòng khám",
+        "info": "Thông tin chi tiết",
+        "save": "Lưu",
+        "typing": "Đang soạn thảo"
     }
 }
