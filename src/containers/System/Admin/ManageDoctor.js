@@ -10,6 +10,9 @@ import 'react-markdown-editor-lite/lib/index.css';
 import './manageDoctor.scss';
 import Select from 'react-select';
 import { injectIntl } from 'react-intl';
+import { toast } from 'react-toastify';
+import adminReducer from '../../../store/reducers/adminReducer';
+// import { saveDetailDoctor } from '../../../store/actions';
 const mdParser = new MarkdownIt();
 
 
@@ -23,13 +26,15 @@ class ManageDoctor extends Component {
             selectedDoctor: null,
             description: '',
             // listDoctor: []
+            isSubmitted: false
         }
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => {
-            this.props.fetchAllDoctorRedux();
-        }, 10000);
+        this.props.fetchAllDoctorRedux();
+        // this.interval = setInterval(() => {
+        //     this.props.fetchAllDoctorRedux();
+        // }, 10000);
     }
     // componentDidUpdate(prevProps) {
     //     if (prevProps.allDoctors !== this.props.allDoctors && this.props.allDoctors.length > 0) {
@@ -45,7 +50,9 @@ class ManageDoctor extends Component {
             contentHTML: html,
         });
     }
-
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
     buildDataInputSelected = (inputData) => {
         const { lang } = this.props;
         let result = [];
@@ -61,23 +68,7 @@ class ManageDoctor extends Component {
 
         return result;
     }
-    handleSaveContentMarkdown = () => {
-        const { selectedDoctor, contentHTML, contentMarkdown, description } = this.state;
 
-        if (!selectedDoctor) {
-            alert("Please select doctor");
-            return;
-        }
-
-        let data = {
-            doctorId: selectedDoctor.value,
-            contentHTML,
-            contentMarkdown,
-            description
-        };
-
-        console.log('DATA SEND:', data);
-    }
     handleChangeDoctor = (selectedDoctor) => {
         this.setState({ selectedDoctor }, () =>
             console.log(`Doctor selected:`, this.state.selectedDoctor)
@@ -91,8 +82,40 @@ class ManageDoctor extends Component {
         })
     }
 
+    fnReset = () => {
+        this.setState({
+            contentMarkdown: '',
+            contentHTML: '',
+            selectedDoctor: null,
+            description: ''
+        })
+    }
+    handleSaveContentMarkdown = () => {
+        const { selectedDoctor, contentHTML, contentMarkdown, description } = this.state;
+        this.setState({ isSubmitted: true });
+        if (!selectedDoctor || !selectedDoctor.value) {
+            return;
+        }
+        let data = {
+            doctorId: selectedDoctor.value,
+            contentHTML: contentHTML,
+            contentMarkdown: contentMarkdown,
+            description: description
+        };
+
+
+
+
+        this.props.saveDetailDoctorRedux(data);
+        this.fnReset();
+    }
+
     render() {
         const { intl } = this.props;
+        const { selectedDoctor } = this.state;
+        let isError =
+            this.state.isSubmitted &&
+            (!selectedDoctor || !selectedDoctor.value);
         return (
             <React.Fragment key={this.props.lang}>
                 <div className="manage-doctor-container">
@@ -122,7 +145,22 @@ class ManageDoctor extends Component {
                                 // options={this.state.listDoctor}
                                 classNamePrefix="react-select"
                                 placeholder={intl.formatMessage({ id: 'manage-doctor.doctor-search' })}
+                                styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        borderColor: isError ? '#ff0000' : baseStyles.borderColor, // Viền đỏ nếu lỗi
+                                        '&:hover': {
+                                            borderColor: isError ? '#ff0000' : baseStyles.borderColor
+                                        },
+                                        boxShadow: isError && state.isFocused ? '0 0 0 1px #ff0000' : baseStyles.boxShadow
+                                    }),
+                                }}
                             />
+                            {isError &&
+                                <span style={{ color: 'red', fontSize: '12px', marginTop: '5px', display: 'block' }}>
+                                    <FormattedMessage id="manage-doctor.confirm-select-doctor" />
+                                </span>
+                            }
                         </div>
                     </div>
 
@@ -145,7 +183,7 @@ class ManageDoctor extends Component {
                     <div className="action-buttons">
                         <button
                             className="btn-save"
-                            disabled={!this.state.selectedDoctor}
+                            // disabled={!this.state.selectedDoctor}
                             onClick={this.handleSaveContentMarkdown}
                         >
                             <i className="fas fa-save"></i> <FormattedMessage id="manage-doctor.save" />
@@ -159,12 +197,15 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = state => ({
     lang: state.app.language,
-    allDoctors: state.admin.allDoctors
+    allDoctors: state.admin.allDoctors,
+    // saveDetailDoctor: state.admin.saveDetailDoctor
 });
 
 const mapDispatchToProps = dispatch => ({
     changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
-    fetchAllDoctorRedux: () => dispatch(actions.fetchAllDoctors())
+    fetchAllDoctorRedux: () => dispatch(actions.fetchAllDoctors()),
+    saveDetailDoctorRedux: (data) => dispatch(actions.saveDetailDoctor(data))
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

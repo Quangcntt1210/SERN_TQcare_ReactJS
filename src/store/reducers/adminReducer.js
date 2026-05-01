@@ -1,3 +1,4 @@
+import { saveDetailDoctor } from '../actions';
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
     deleteStatus: 'idle' | 'success' | 'fail',
     isUserUpdated: 'idle' | 'success' | 'fail',
     topDoctors: [],
-    allDoctors: []
+    allDoctors: [],
+    saveDetailDoctor: 'idle' | 'success' | 'fail'
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -154,6 +156,22 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 allDoctors: []
             };
+        case actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS:
+            return {
+                ...state,
+                saveDetailDoctor: 'success'
+            };
+        case actionTypes.SAVE_DETAIL_DOCTOR_FAILS:
+            return {
+                ...state,
+                saveDetailDoctor: 'fail'
+            };
+        case actionTypes.RESET_SAVE_DETAIL_DOCTOR:
+            return {
+                ...state,
+                saveDetailDoctor: 'idle'
+            };
+
         default:
             return state;
     }

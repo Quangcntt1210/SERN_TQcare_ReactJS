@@ -88,6 +88,7 @@
         "infor": "Thông tin giới thiệu",
         "select-doctor": "Chọn bác sĩ",
         "doctor-description": "Nhập mô tả ngắn gọn về bác sĩ...",
-        "doctor-search": "Tìm kiếm bác sĩ..."
+        "doctor-search": "Tìm kiếm bác sĩ...",
+        "confirm-select-doctor": "Vui lòng chọn bác sĩ..."
     }
 }
