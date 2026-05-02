@@ -89,6 +89,8 @@
         "select-doctor": "Chọn bác sĩ",
         "doctor-description": "Nhập mô tả ngắn gọn về bác sĩ...",
         "doctor-search": "Tìm kiếm bác sĩ...",
-        "confirm-select-doctor": "Vui lòng chọn bác sĩ..."
+        "confirm-select-doctor": "Vui lòng chọn bác sĩ...",
+        "savedetail-success": "Lưu mô tả bác sĩ thành công",
+        "savedetail-fails": "Lưu mô tả bác sĩ thất bại"
     }
 }

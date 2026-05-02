@@ -49,11 +49,15 @@ class ManageDoctor extends Component {
             this.props.saveDetailDoctor !== 'idle'
         ) {
             if (this.props.saveDetailDoctor === 'success') {
-                toast.success("Save detail doctor succeed!");
+                toast.success(
+                    this.props.intl.formatMessage({ id: "manage-doctor.savedetail-success" })
+                );
             }
 
             if (this.props.saveDetailDoctor === 'fail') {
-                toast.error("Save detail doctor fails!");
+                toast.success(
+                    this.props.intl.formatMessage({ id: "manage-doctor.savedetail-fails" })
+                );
             }
 
             this.props.resetDetailDoctorRedux();

@@ -90,6 +90,8 @@
         "select-doctor": "Select doctor",
         "doctor-description": "Enter a brief description about the doctor...",
         "doctor-search": "Search for doctor...",
-        "confirm-select-doctor": "Please select a doctor..."
+        "confirm-select-doctor": "Please select a doctor...",
+        "savedetail-success": "Save description of successful doctor",
+        "savedetail-fails": "Save description of failure doctor"
     }
 }
