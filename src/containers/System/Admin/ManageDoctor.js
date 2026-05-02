@@ -36,14 +36,30 @@ class ManageDoctor extends Component {
         //     this.props.fetchAllDoctorRedux();
         // }, 10000);
     }
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.allDoctors !== this.props.allDoctors && this.props.allDoctors.length > 0) {
-    //         let dataSelect = this.buildDataInputSelected(this.props.allDoctors);
-    //         this.setState({
-    //             listDoctor: dataSelect
-    //         });
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        //     if (prevProps.allDoctors !== this.props.allDoctors && this.props.allDoctors.length > 0) {
+        //         let dataSelect = this.buildDataInputSelected(this.props.allDoctors);
+        //         this.setState({
+        //             listDoctor: dataSelect
+        //         });
+        //     }
+
+        if (
+            prevProps.saveDetailDoctor !== this.props.saveDetailDoctor &&
+            this.props.saveDetailDoctor !== 'idle'
+        ) {
+            if (this.props.saveDetailDoctor === 'success') {
+                toast.success("Save detail doctor succeed!");
+            }
+
+            if (this.props.saveDetailDoctor === 'fail') {
+                toast.error("Save detail doctor fails!");
+            }
+
+            this.props.resetDetailDoctorRedux();
+        }
+    }
+
     handleEditorChange = ({ html, text }) => {
         this.setState({
             contentMarkdown: text,
@@ -102,10 +118,6 @@ class ManageDoctor extends Component {
             contentMarkdown: contentMarkdown,
             description: description
         };
-
-
-
-
         this.props.saveDetailDoctorRedux(data);
         this.fnReset();
     }
@@ -198,14 +210,14 @@ class ManageDoctor extends Component {
 const mapStateToProps = state => ({
     lang: state.app.language,
     allDoctors: state.admin.allDoctors,
-    // saveDetailDoctor: state.admin.saveDetailDoctor
+    saveDetailDoctor: state.admin.saveDetailDoctor
 });
 
 const mapDispatchToProps = dispatch => ({
     changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
     fetchAllDoctorRedux: () => dispatch(actions.fetchAllDoctors()),
-    saveDetailDoctorRedux: (data) => dispatch(actions.saveDetailDoctor(data))
-
+    saveDetailDoctorRedux: (data) => dispatch(actions.saveDetailDoctor(data)),
+    resetDetailDoctorRedux: () => dispatch(actions.resetDetailDoctor())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
