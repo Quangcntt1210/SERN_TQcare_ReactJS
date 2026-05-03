@@ -9,7 +9,6 @@ import { path } from '../utils'
 import Home from '../routes/Home';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
-
 import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
@@ -17,14 +16,12 @@ import HomePage from './HomePage/HomePage';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import CustomScrollbars from '../components/CustomScrollbars';
-
 import './App.scss';
-
-
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import Terms from '../pages/Terms';
 import Cookies from '../pages/Cookies';
 import FAQ from '../pages/FAQ';
+import detailDoctor from './Patient/Doctor/detailDoctor';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -58,7 +55,9 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.HOMEPAGE} exact component={HomePage} />
+                                    <Route path={path.DETAIL_DOCTOR} component={detailDoctor} />
+
 
                                     {/*  footer */}
                                     <Route path="/privacy" component={PrivacyPolicy} />

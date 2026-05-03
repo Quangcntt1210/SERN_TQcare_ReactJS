@@ -1,0 +1,95 @@
+.doctor-detail-container {
+    margin-top: 75px; // Điều chỉnh theo độ cao thực tế của HomeHeader
+    padding: 0 15%; // Căn giữa nội dung với lề rộng 2 bên cho sang trọng
+    background-color: #fff;
+
+    .intro-doctor {
+        display: flex;
+        padding: 20px 0;
+        gap: 20px;
+
+        .content-left {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #ddd;
+        }
+
+        .content-right {
+            flex: 1; // Chiếm phần không gian còn lại
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .up {
+                font-size: 20px;
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 8px;
+            }
+
+            .down {
+                font-size: 14px;
+                color: #555;
+                line-height: 1.5;
+                text-align: justify;
+            }
+        }
+    }
+
+    .schedule-doctor {
+        display: flex;
+        min-height: 200px;
+        border-top: 1px solid #eee;
+        padding: 20px 0;
+    }
+
+    .detail-infor-doctor {
+        background-color: #f9f9f9;
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+        // Chứa nội dung bài viết dài
+    }
+
+    .detail-infor-doctor {
+        padding: 30px 15%; // Giữ lề đồng nhất với phần Intro
+        background-color: #fff;
+        border-top: 10px solid #f9f9f9; // Tạo khoảng cách xám nhẹ phân tách các phần
+        color: #333;
+
+        // Định dạng nội dung bên trong HTML đổ về
+        h2,
+        h3 {
+            color: #45c3d2; // Màu xanh thương hiệu
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+
+            li {
+                line-height: 1.6;
+                margin-bottom: 5px;
+            }
+        }
+
+        img {
+            max-width: 100%; // Đảm bảo ảnh trong bài viết không bị tràn khung
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}

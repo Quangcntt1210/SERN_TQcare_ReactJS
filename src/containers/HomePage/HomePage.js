@@ -19,13 +19,14 @@ class HomePage extends Component {
 
         return (
             <div>
-                <HomeHeader />
+                <HomeHeader isShowBanner={true} />
                 <Specialty />
                 <Medical />
                 <Doctor />
                 <Handbook />
                 <About />
                 <HomeFooter />
+
             </div >
         );
     }
