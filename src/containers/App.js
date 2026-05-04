@@ -22,6 +22,8 @@ import Terms from '../pages/Terms';
 import Cookies from '../pages/Cookies';
 import FAQ from '../pages/FAQ';
 import detailDoctor from './Patient/Doctor/detailDoctor';
+import Doctor from '../routes/Doctor';
+
 class App extends Component {
 
     handlePersistorState = () => {
@@ -57,7 +59,7 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} exact component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} component={detailDoctor} />
-
+                                    <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
 
                                     {/*  footer */}
                                     <Route path="/privacy" component={PrivacyPolicy} />
