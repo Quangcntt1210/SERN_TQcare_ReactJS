@@ -12,6 +12,7 @@ import Select from 'react-select';
 import { injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 import adminReducer from '../../../store/reducers/adminReducer';
+import { getDetailInforDoctorService } from '../../../services/userService';
 // import { saveDetailDoctor } from '../../../store/actions';
 const mdParser = new MarkdownIt();
 
@@ -26,7 +27,8 @@ class ManageDoctor extends Component {
             selectedDoctor: null,
             description: '',
             // listDoctor: []
-            isSubmitted: false
+            isSubmitted: false,
+            oldDataDoctor: false
         }
     }
 
@@ -89,11 +91,6 @@ class ManageDoctor extends Component {
         return result;
     }
 
-    handleChangeDoctor = (selectedDoctor) => {
-        this.setState({ selectedDoctor }, () =>
-            console.log(`Doctor selected:`, this.state.selectedDoctor)
-        );
-    };
 
 
     handleOnChangeDescription = (event) => {
@@ -110,6 +107,31 @@ class ManageDoctor extends Component {
             description: ''
         })
     }
+    handleChangeDoctor = async (selectedDoctor) => {
+        this.setState({ selectedDoctor })
+
+        let resp = await getDetailInforDoctorService(selectedDoctor.value)
+        if (resp && resp.errorCode === 0 && resp.data && resp.data.Markdown) {
+            let markdown = resp.data.Markdown;
+
+            this.setState({
+                contentHTML: markdown.contentHTML,
+                contentMarkdown: markdown.contentMarkdown,
+                description: markdown.description,
+                oldDataDoctor: true
+            });
+        } else {
+            this.setState({
+                contentHTML: '',
+                contentMarkdown: '',
+                description: '',
+                oldDataDoctor: false
+            });
+        }
+        console.log(`Doctor selected:`, resp)
+
+    };
+
     handleSaveContentMarkdown = () => {
         const { selectedDoctor, contentHTML, contentMarkdown, description } = this.state;
         this.setState({ isSubmitted: true });
@@ -127,6 +149,7 @@ class ManageDoctor extends Component {
     }
 
     render() {
+        let { oldDataDoctor } = this.state
         const { intl } = this.props;
         const { selectedDoctor } = this.state;
         let isError =
@@ -198,11 +221,15 @@ class ManageDoctor extends Component {
 
                     <div className="action-buttons">
                         <button
-                            className="btn-save"
-                            // disabled={!this.state.selectedDoctor}
+                            className={oldDataDoctor ? "btn-save" : "btn-update"}
                             onClick={this.handleSaveContentMarkdown}
                         >
-                            <i className="fas fa-save"></i> <FormattedMessage id="manage-doctor.save" />
+                            <i className="fas fa-save"></i>
+                            {oldDataDoctor ? (
+                                <FormattedMessage id="manage-doctor.update" />
+                            ) : (
+                                <FormattedMessage id="manage-doctor.save" />
+                            )}
                         </button>
                     </div>
                 </div>

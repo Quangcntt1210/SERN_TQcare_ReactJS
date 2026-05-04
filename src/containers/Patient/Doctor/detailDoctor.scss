@@ -51,19 +51,19 @@
         background-color: #f9f9f9;
         padding: 20px 0;
         border-top: 1px solid #eee;
-        // Chứa nội dung bài viết dài
+
     }
 
     .detail-infor-doctor {
-        padding: 30px 15%; // Giữ lề đồng nhất với phần Intro
+        padding: 30px 15%;
         background-color: #fff;
-        border-top: 10px solid #f9f9f9; // Tạo khoảng cách xám nhẹ phân tách các phần
+        border-top: 10px solid #f9f9f9;
         color: #333;
 
-        // Định dạng nội dung bên trong HTML đổ về
+
         h2,
         h3 {
-            color: #45c3d2; // Màu xanh thương hiệu
+            color: #45c3d2;
             margin: 20px 0 10px 0;
         }
 
